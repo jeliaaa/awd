@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #5E35B1;
+    --color-secondary: #F76C5E;
+    --color-accent: #4FC3F7;
+    --color-background: #FAFAFA;
+    --color-text: #333333;
+    --color-calm: #A8D5BA;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.plain-text {
+    font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+    .title {
+        font-size: 1.3rem;
+    }
+
+    .plain-text {
+        font-size: 1.125rem;
+    }
+}
+
+/* Medium screens ≥ 768px */
+@media (min-width: 768px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .plain-text {
+        font-size: 1.25rem;
+    }
+}
+
+/* Large screens ≥ 1024px */
+@media (min-width: 1024px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .plain-text {
+        font-size: 1.5rem;
+    }
+}
