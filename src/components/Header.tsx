@@ -4,6 +4,7 @@ import clsx from "clsx";
 import MenuIcon from "../assets/icons/bars-solid.svg?react";
 import CloseIcon from "../assets/icons/xmark.svg?react";
 import LanguageDropdown from "./LanguageDropdown";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navItems = [
   { label: "მთავარი", path: "/" },
@@ -30,13 +31,22 @@ const Header = () => {
 
   return (
     <div className="w-full z-50 bg-background sticky top-0 backdrop-blur-md shadow-sm">
-      {/* Top Section: Logo + Language Switcher */}
-      <div className={`w-full p-10 flex items-center justify-between ${isScrolled ? "hidden" : "block"}`}>
-        <div className="title font-bold text-primary text-lg">
-          <Link to="/">Logo</Link>
-        </div>
-        <LanguageDropdown />
-      </div>
+      <AnimatePresence>
+        {!isScrolled && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="w-full p-10 flex items-center justify-between bg-background"
+          >
+            <div className="title font-bold text-primary text-lg">
+              <Link to="/">Logo</Link>
+            </div>
+            <LanguageDropdown />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
 
       {/* Desktop Navigation */}
