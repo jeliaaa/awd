@@ -17,7 +17,7 @@ const Header = () => {
   const handleLinkClick = () => setMenuOpen(false);
 
   return (
-    <header className={clsx("w-full bg-background backdrop-blur-md z-50 shadow-sm",
+    <header className={clsx("w-full bg-background backdrop-blur-md z-50 shadow-sm h-[10dvh]",
       menuOpen && "fixed top-0 left-0"
     )}>
       <div className="px-4 py-3 flex items-center justify-between">
@@ -49,7 +49,7 @@ const Header = () => {
       {/* Mobile Navigation */}
       <div
         className={clsx(
-          "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
+          "md:hidden overflow-hidden transition-all bg-background duration-300 ease-in-out",
           menuOpen ? "max-h-60 opacity-100 px-4 pb-4" : "max-h-0 opacity-0 px-4"
         )}
       >

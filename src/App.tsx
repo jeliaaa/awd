@@ -2,8 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import { About } from './pages/About';
 import Accesebility from './components/Accesebility';
+import Home from './pages/Home';
 
-const Home = () => <h1>Home Page</h1>;
 
 const App = () => {
   return (
