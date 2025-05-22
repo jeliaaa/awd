@@ -4,7 +4,7 @@ import clsx from "clsx";
 import MenuIcon from "../assets/icons/bars-solid.svg?react";
 import CloseIcon from "../assets/icons/xmark.svg?react";
 import LanguageDropdown from "./LanguageDropdown";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 const navItems = [
   { label: "მთავარი", path: "/" },
@@ -17,36 +17,29 @@ const navItems = [
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 50);
+  });
 
   const handleLinkClick = () => setMenuOpen(false);
 
   return (
     <div className="w-full z-50 bg-background sticky top-0 backdrop-blur-md shadow-sm">
-      <AnimatePresence>
-        {!isScrolled && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="w-full p-10 flex items-center justify-between bg-background"
-          >
-            <div className="title font-bold text-primary text-lg">
-              <Link to="/">Logo</Link>
-            </div>
-            <LanguageDropdown />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        animate={{ 
+          position: isScrolled ? "fixed" : "relative",
+          y: isScrolled ? "-100%" : 0
+        }}
+        // transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="w-full p-10 flex z-50 items-center justify-between bg-background"
+      >
+        <div className="title font-bold text-primary text-lg">
+          <Link to="/">Logo</Link>
+        </div>
+        <LanguageDropdown />
+      </motion.div>
 
 
       {/* Desktop Navigation */}
@@ -54,7 +47,7 @@ const Header = () => {
         className={clsx(
           "hidden md:flex w-full py-5 px-10 justify-between space-x-6 items-center plain-text transition-all duration-300",
           isScrolled
-            ? "sticky top-0 left-0 z-50 bg-primary text-white shadow-md"
+            ? "sticky top-0 left-0 z-40 bg-primary text-white shadow-md"
             : "bg-primary text-white"
         )}
       >
