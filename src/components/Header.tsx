@@ -32,7 +32,7 @@ const Header = () => {
           position: isScrolled ? "fixed" : "relative",
           y: isScrolled ? "-100%" : 0
         }}
-        // transition={{ duration: 0.3, ease: "easeInOut" }}
+        transition={{ duration: 0.1, ease: "easeInOut" }}
         className="w-full p-10 flex z-50 items-center justify-between bg-background"
       >
         <div className="title font-bold text-primary text-lg">
