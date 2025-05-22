@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/en/:path*",
+            "destination": "/"
+        },
+        {
+            "source": "/ka/:path*",
+            "destination": "/"
+        }
+    ]
+}
