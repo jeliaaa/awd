@@ -6,9 +6,11 @@ import CloseIcon from "../assets/icons/xmark.svg?react";
 import LanguageDropdown from "./LanguageDropdown";
 
 const navItems = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Contact", path: "/contact" },
+  { label: "მთავარი", path: "/" },
+  { label: "ჩვენს შესახებ", path: "/about" },
+  { label: "ბლოგი", path: "/contact" },
+  { label: "რესურსები", path: "/contact" },
+  { label: "კონტაქტი", path: "/contact" },
 ];
 
 const Header = () => {
@@ -17,31 +19,32 @@ const Header = () => {
   const handleLinkClick = () => setMenuOpen(false);
 
   return (
-    <header className={clsx("w-full bg-background backdrop-blur-md z-50 shadow-sm h-[10dvh]",
+    <header className={clsx("w-full bg-background backdrop-blur-md z-50 shadow-sm",
       menuOpen && "fixed top-0 left-0"
     )}>
-      <div className="px-4 py-3 flex items-center justify-between">
+      <div className="flex flex-col items-center justify-between">
         {/* Logo */}
-        <div className="title font-bold text-primary text-lg">
-          <Link to="/">Logo</Link>
+        <div className="w-full p-10 flex items-center justify-between">
+          <div className="title font-bold text-primary text-lg">
+            <Link to="/">Logo</Link>
+          </div>
+          <LanguageDropdown />
         </div>
-
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6 items-center plain-text">
+        <nav className="hidden bg-primary text-white py-5 px-10 w-full justify-between md:flex space-x-6 items-center plain-text">
           {navItems.map((item) => (
             <Link
               key={item.label}
               to={item.path}
-              className="hover:text-primary transition"
+              className="hover:underline transition"
             >
               {item.label}
             </Link>
           ))}
-          <LanguageDropdown />
         </nav>
 
         {/* Mobile Menu Button */}
-        <button onClick={() => setMenuOpen((prev) => !prev)} className="md:hidden cursor-pointer">
+        <button onClick={() => setMenuOpen((prev) => !prev)} className="md:hidden cursor-pointer m-5">
           {menuOpen ? <CloseIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
         </button>
       </div>
@@ -64,7 +67,6 @@ const Header = () => {
               {item.label}
             </Link>
           ))}
-          <LanguageDropdown />
         </div>
       </div>
     </header>

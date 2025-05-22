@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: 'MainFont';
+    src: url('fonts/bpg_nino_mtavruli_bold.ttf');
+}
+
 @theme {
     --color-primary: #5E35B1;
     --color-secondary: #F76C5E;
@@ -11,41 +16,54 @@
 
 .title {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    /* was 1.5rem */
 }
 
 .plain-text {
-    font-size: 1rem;
+    font-size: 0.875rem;
+    /* was 1rem */
 }
 
 @media (min-width: 640px) {
     .title {
-        font-size: 1.3rem;
+        font-size: 1.125rem;
+        /* was 1.3rem */
     }
 
     .plain-text {
-        font-size: 1.125rem;
+        font-size: 1rem;
+        /* was 1.125rem */
     }
 }
 
 /* Medium screens ≥ 768px */
 @media (min-width: 768px) {
     .title {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        /* was 1.5rem */
     }
 
     .plain-text {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
+        /* was 1.25rem */
     }
 }
 
 /* Large screens ≥ 1024px */
 @media (min-width: 1024px) {
     .title {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        /* was 2rem */
     }
 
     .plain-text {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        /* was 1.5rem */
     }
+}
+
+
+* {
+    font-family: "MainFont", sans-serif;
 }
