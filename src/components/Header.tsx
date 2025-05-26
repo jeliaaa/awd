@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import MenuIcon from "../assets/icons/bars-solid.svg?react";
 import CloseIcon from "../assets/icons/xmark.svg?react";
 import LanguageDropdown from "./LanguageDropdown";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 const navItems = [
   { label: "მთავარი", path: "/" },

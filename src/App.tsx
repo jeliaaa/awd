@@ -7,7 +7,7 @@ import Home from './pages/Home';
 
 const App = () => {
   return (
-    <div>
+    <div className='relative'>
       <Header />
       <main>
         <Routes>
