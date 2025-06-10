@@ -7,7 +7,7 @@ const Accesebility = () => {
     return (
         <>
             <button
-                className="bg-blue-800 cursor-pointer fixed bottom-4 right-4 w-15 md:w-20 aspect-square text-white p-1 rounded-full z-50"
+                className="bg-blue-800 cursor-pointer fixed bottom-4 right-4 w-15 md:w-20 aspect-square text-white p-1 rounded-full z-1000"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <div className="w-full h-full flex items-center justify-center aspect-square rounded-full border">
