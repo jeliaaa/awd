@@ -16,7 +16,7 @@ const Accesebility = () => {
             </button>
 
             {isOpen && (
-                <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
+                <div className="fixed inset-0 z-500 bg-black/50 flex items-center justify-center">
                     <div className="bg-white w-11/12 md:w-1/2 h-1/2 rounded-lg flex flex-col items-center py-3 overflow-auto">
                         <div className="title font-bold border-b-2 w-full pb-3 px-3 flex justify-between items-center">
                             <h1 className="text-2xl">Accessibility Options</h1>

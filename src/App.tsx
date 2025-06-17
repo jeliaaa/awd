@@ -4,6 +4,7 @@ import { About } from './pages/About';
 import Accesebility from './components/Accesebility';
 import Home from './pages/Home';
 import ContactUs from './pages/ContactUs';
+import Blog from './pages/Blog';
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/blog" element={<Blog />} />
           {/* Redirect unknown paths to home */}
           {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
         </Routes>

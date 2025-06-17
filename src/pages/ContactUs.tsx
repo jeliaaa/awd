@@ -1,21 +1,19 @@
-import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 
 const ContactUs = () => {
-    useEffect(() => {
-        // Fix marker icon issue with Leaflet
-        delete L.Icon.Default.prototype._getIconUrl;
-        L.Icon.Default.mergeOptions({
-            iconRetinaUrl:
-                "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-            iconUrl:
-                "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-            shadowUrl:
-                "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-        });
-    }, []);
+    // useEffect(() => {
+    //     // Fix marker icon issue with Leaflet
+    //     delete L.Icon.Default.prototype._getIconUrl;
+    //     L.Icon.Default.mergeOptions({
+    //         iconRetinaUrl:
+    //             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
+    //         iconUrl:
+    //             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
+    //         shadowUrl:
+    //             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    //     });
+    // }, []);
 
     return (
         <div className="bg-gray-100 flex flex-col items-center p-4 md:p-16">
@@ -40,7 +38,6 @@ const ContactUs = () => {
                     />
                     <textarea
                         placeholder="Your Message"
-                        rows="5"
                         className="p-3 border rounded-md resize-none"
                     />
                     <button className="bg-primary/90 cursor-pointer text-white py-2 px-4 rounded hover:bg-primary">

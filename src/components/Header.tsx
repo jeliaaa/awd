@@ -9,7 +9,7 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 const navItems = [
   { label: "მთავარი", path: "/" },
   { label: "ჩვენს შესახებ", path: "/about" },
-  { label: "ბლოგი", path: "/contact" },
+  { label: "ბლოგი", path: "/blog" },
   { label: "რესურსები", path: "/contact" },
   { label: "კონტაქტი", path: "/contact" },
 ];
