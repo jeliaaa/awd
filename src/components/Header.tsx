@@ -9,9 +9,13 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 const navItems = [
   { label: "მთავარი", path: "/" },
   { label: "ჩვენს შესახებ", path: "/about" },
+  { label: "პროექტები", path: "/projects"},
+  { label: "ანგარიშები და კვლევები", path: "/reports" },
+  { label: "შშმ ქალთა ისტორიები", path: "/stories"},
+  { label: "კალენდარი", path: "/calendar"},
   { label: "ბლოგი", path: "/blog" },
-  { label: "რესურსები", path: "/contact" },
   { label: "კონტაქტი", path: "/contact" },
+
 ];
 
 const Header = () => {
