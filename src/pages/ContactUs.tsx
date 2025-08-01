@@ -16,7 +16,7 @@ const ContactUs = () => {
     // }, []);
 
     return (
-        <div className="bg-gray-100 flex flex-col items-center p-4 md:p-16">
+        <div className="bg-background flex flex-col items-center p-4 md:p-16 w-full">
             {/* Header */}
             <div className="w-full text-center py-6">
                 <h1 className="text-4xl font-bold text-gray-800">Contact Us</h1>
@@ -63,7 +63,7 @@ const ContactUs = () => {
             </div>
 
             {/* Map */}
-            <div className="w-full mt-8 h-64 md:h-96 rounded-xl overflow-hidden">
+            <div className="w-full mt-8 h-64 md:h-96 rounded-xl z-2 overflow-hidden">
                 <MapContainer
                     center={[41.6434, 41.6367]} // Example: Batumi
                     zoom={15}

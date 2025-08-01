@@ -7,7 +7,6 @@ import LanguageDropdown from "./LanguageDropdown";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 const navItems = [
-  { label: "მთავარი", path: "/" },
   { label: "ჩვენს შესახებ", path: "/about" },
   { label: "პროექტები", path: "/projects"},
   { label: "ანგარიშები და კვლევები", path: "/reports" },
@@ -59,7 +58,7 @@ const Header = () => {
           <Link
             key={item.label}
             to={item.path}
-            className="hover:underline transition"
+            className="hover:underline transition text-center"
           >
             {item.label}
           </Link>

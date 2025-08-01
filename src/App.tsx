@@ -1,34 +1,30 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
-import { About } from './pages/About';
+import Footer from './components/Footer';
 import Accesebility from './components/Accesebility';
-import Home from './pages/Home';
-import ContactUs from './pages/ContactUs';
-import Blog from './pages/Blog';
-import Projects from './pages/Projects';
-import Reports from './pages/Reports';
-import Stories from './pages/Stories';
-import Calendar from './pages/Calendar';
-
+import Breadcrumbs from './components/webNav/Breadcrumbs';
+import { publicRoutes } from './routes/publicRoutes';
 
 const App = () => {
+  const location = useLocation();
+  const currentRoute = publicRoutes.find(route =>
+    location.pathname === route.path ||
+    location.pathname.startsWith(route.path + '/')
+  );
+  const showBreadcrumbs = currentRoute?.showBreadcrumbs;
+
   return (
-    <div className='relative'>
+    <div className="relative flex flex-col items-center justify-center">
       <Header />
-      <main>
+      <div className="main_wrapper w-full flex flex-col items-center">
+        {showBreadcrumbs && <Breadcrumbs />}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path='/projects' element={<Projects/>}/>
-          <Route path='/reports' element={<Reports/>}/>
-          <Route path='/stories' element={<Stories/>}/>
-          <Route path='/calendar' element={<Calendar/>}/>
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<ContactUs />} />
-          {/* Redirect unknown paths to home */}
-          {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+          {publicRoutes.map(({ path, component: Element }) => (
+            <Route key={path} path={path} element={<Element />} />
+          ))}
         </Routes>
-      </main>
+      </div>
+      <Footer />
       <Accesebility />
     </div>
   );
