@@ -16,7 +16,7 @@ const ContactUs = () => {
     // }, []);
 
     return (
-        <div className="bg-background flex flex-col items-center p-4 md:p-16 w-full">
+        <div className="flex flex-col items-center p-4 md:p-16 w-full">
             {/* Header */}
             <div className="w-full text-center py-6">
                 <h1 className="text-4xl font-bold text-gray-800">Contact Us</h1>

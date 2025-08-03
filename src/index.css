@@ -69,6 +69,8 @@
     justify-content: center;
     align-items: center;
     background-color: #5E35B1;
+    min-height: 70dvh;
+    background-color: #FAFAFA;
 }
 
 footer {

@@ -23,7 +23,7 @@ const statsData = [
 ];
 
 const HeroBox: React.FC<HeroBoxProps> = ({ heading, text, image, to }) => (
-  <div className="flex flex-col md:flex-row items-center bg-background rounded-lg shadow-md p-6 gap-6 w-full">
+  <div className="flex flex-col md:flex-row items-center bg-background rounded-lg shadow-md p-6 gap-6 w-full ">
     <div className="flex flex-col gap-3 md:w-1/2 w-full">
       <p className="title font-bold text-primary">{heading}</p>
       <p className="plain-text text-gray-700">{text}</p>
@@ -41,7 +41,7 @@ const MainPage: React.FC = () => {
   // const { t } = useTranslation();
 
   return (
-    <div className="w-full py-8 lg:pb-0 lg:pt-4 space-y-8">
+    <div className="w-full py-8 lg:pb-0 lg:pt-4 space-y-8 bg-primary">
       <div className="flex flex-col gap-6 p-10">
         <div className='flex flex-col lg:flex-row gap-6'>
           <div className="lg:w-1/2 w-full ">
