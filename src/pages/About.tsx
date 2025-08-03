@@ -1,43 +1,54 @@
-export default function About() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white px-6 py-12 space-y-24">
+import clsx from "clsx";
+import { useState } from "react";
 
-      {/* Section 1: Introduction */}
-      <section className="max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">Who We Are</h2>
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-          We’re a passionate team dedicated to building meaningful digital experiences.
-          With a focus on creativity, innovation, and functionality, we strive to bring ideas to life
-          through intuitive design and powerful technology.
-        </p>
-      </section>
+const About = () => {
+  const team = [
+    { name: 'ნინო ბარამიძე' },
+    { name: 'ნათია კაპანაძე' },
+    { name: 'თეონა გელაშვილი' },
+    { name: 'ნინო კობახიძე' }
+  ]
 
-      {/* Section 2: Mission */}
-      <section className="max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Mission</h2>
-        <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-          Our mission is to empower individuals and businesses with cutting-edge solutions
-          that drive growth, inspire change, and make a positive impact on the world.
-          Every line of code and pixel we craft is rooted in purpose and clarity.
-        </p>
-      </section>
+  const tabs = [
+    {
+      name: 'მოკლე ინფორმაცია', id: 0, elem: <div className="space-y-6 plain-text"> <p>          კოალიცია დამოუკიდებელი ცხოვრებისათვის არის საზოგადოებრივი ორგანიზაცია, რომლის მისიაა ნებისმიერი ადამიანისთვის შეიქმნას თანაბარი პირობები პოტენციალის გამოსავლენად და მოხდეს შეზღუდული შესაძლებლობების მქონე პირების მაქსიმალური ჩართულობა საზოგადოებაში მიმდინარე პოლიტიკურ, ეკონომიკურ, სოციალურ და კულტურულ ცხოვრებაში.        </p><p>  ამისათვის, კოალიცია ცდილობს აამაღლოს საზოგადოების ცნობიერება და მასში დამკვიდრებული ტრადიციული მიდგომები შეზღუდული შესაძლებლობის მქონე პირებისადმი და შეზღუდული შესაძლებლობის მქონე ადამიანების მიმართ ჩაანაცვლოს თანამედროვე მიდგომებით, რაც გულისხმობს: შეიცვალოს საზოგადოების დამოკიდებულება, ფიზიკური გარემო, კანონმდებლობა და არა - შეზღუდული შესაძლებლობის მქონე ცალკეული ადამიანი</p><p>  <b>    კერძოდ, კოალიცია დამოუკიდებელი ცხოვრებისათვის ცდილობს იმ არასამთავრობო ორგანიზაციების მხარდაჭერას და ინსტიტუციურ განვითარებას, რომელთა საქმიანობაც მიმართულია შეზღუდული შესაძლებლობის მქონე პირთა თანაბარი სამოქალაქო უფლებებისა და შესაძლებლობების დაცვასა და მომსახურებაზე  </b></p><p>  კოალიცია საერთაშორისო ნორმებისა და კონვენციების დაყრდნობით, ეროვნულ დონეზე,  ხელს უწყობს კანონმდებლობისა და აღსრულების სახელმწიფო სისტემის სრულქმნას, აგრეთვე, ფიზიკურ გარემოში უნივერსალური დიზაინის დანერგვასა და დამოუკიდებელი ცხოვრების ფილოსოფიის პოპულარიზაციას  კოალიცია დამოუკიდებელი ცხოვრებისათვის აღიარებს თითოეული შეზღუდული შესაძლებლობების მქონე პირის დამოუკიდებელი და ღირსეული თანაცხოვრების უფლებას საზოგადოებაში</p></div>
+    },
+    {
+      name: 'გუნდი', id: 1,
 
-      {/* Section 2: Mission */}
-      <section className="max-w-5xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Team</h2>
-        <div className="grid grid-cols-4 gap-5">
+      elem: <div className="flex flex-wrap pb-10 gap-6 justify-center" >
 
-          {/* 5 */}
-          <div className="group rounded-lg overflow-hidden cursor-pointer flex relative h-[400px] flex-col justify-start items-start">
-            <img className="w-full h-full object-cover" src="https://picsum.photos/400/400" alt="200/300" />
-            <div className="absolute transition-all flex flex-col gap-2 items-start justify-start h-2/4 bottom-0 translate-y-full py-2 group-hover:translate-y-0 px-4 left-0 bg-gray-700/50 shadow-2xl backdrop-blur-3xl w-full">
-              <h2 className="text-xl text-start">Name Surname</h2>
-              <p className="text-sm text-start">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae, culpa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, veritatis!</p>
+
+        {team.map((member, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg w-80 flex flex-col justify-between transition-shadow duration-300">
+            <img src={`https://picsum.photos/200`} alt={member.name} className="w-full h-60 object-cover object-top" />
+            <div className="p-4 flex-1">
+              <h3 className="title font-semibold text-primary">{member.name}</h3>
             </div>
           </div>
+        ))}
+      </div >
+    }
+  ]
 
-        </div>
-      </section>
+  const [activeTab, setActiveTab] = useState<number>(0);
+  return (
+    <div className="bg-background px-6 py-12 space-y-10 w-full h-full">
+      <nav className="flex justify-center">
+        <ul className="flex gap-x-3">
+          {tabs.map(tab => (
+            <li onClick={() => setActiveTab(tab.id)} key={tab.id} className={clsx(
+              "title border border-gray-200 rounded-md p-2 cursor-pointer hover:-translate-y-1", tab.id === activeTab ? "bg-primary text-white" : "bg-white text-primary")}>
+              {tab.name}
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div>
+        {tabs[activeTab].elem}
+      </div>
     </div>
   );
 };
+
+export default About;

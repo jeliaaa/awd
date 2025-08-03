@@ -13,7 +13,7 @@ const BackBtn = () => {
     if (pathArr.length > 1) {
         pathArr.shift();
     } else {
-        pathArr = ['main'];
+        pathArr = [''];
     }
 
     const newPath = `/${pathArr.join('/')}`;
@@ -21,7 +21,7 @@ const BackBtn = () => {
     return (
         <Link to={newPath} className='flex justify-between cursor-pointer items-center'>
             <ChevronLeftIcon className="text-primary mb-1 rotate-180 w-4 h-4 fill-primary" />
-            <button className="text-primary uppercase bg-color-primary rounded">
+            <button className="text-primary cursor-pointer uppercase bg-color-primary rounded">
                 <span>უკან</span>
             </button>
         </Link>

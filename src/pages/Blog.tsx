@@ -74,7 +74,7 @@ export default function Blog() {
     const totalPages = Math.ceil(blogData.length / itemsPerPage);
 
     return (
-        <div className="flex pt-15 flex-col lg:flex-row gap-6 bg-background p-4 w-full mx-auto">
+        <div className="flex pt-15 flex-col lg:flex-row gap-6 bg-background p-4 pb-20 w-full mx-auto">
             {/* Main Section */}
             <div className="flex-1">
                 <h1 className="title font-bold mb-4">Latest News</h1>
