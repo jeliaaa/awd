@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div className="relative flex flex-col items-center justify-center">
       <Header />
-      <div className="main_wrapper w-full flex flex-col items-center">
+      <div className="main_wrapper w-full flex flex-col items-center justify-start">
         {showBreadcrumbs && <Breadcrumbs />}
         <Routes>
           {publicRoutes.map(({ path, component: Element }) => (

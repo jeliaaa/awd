@@ -66,7 +66,7 @@
     width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     background-color: #5E35B1;
     min-height: 70dvh;
@@ -87,4 +87,10 @@ footer {
         background-color: #5E35B1;
         color: #FAFAFA
     }
+}
+
+.customscroll::-webkit-scrollbar {
+    width: 8px;
+    scrollbar-width: thin;
+    scrollbar-face-color: red;
 }

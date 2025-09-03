@@ -1,10 +1,11 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import i18n from 'i18next'
 
 // Helper function to create Axios instance for a specific API version
 const createAxiosInstance = (version: string) => {
     const instance = axios.create({
-        baseURL: `${import.meta.env.VITE_BACKEND_APP_URL}/api/${version}`,
+        baseURL: `${import.meta.env.VITE_BACKEND_APP_URL}/${i18n.language || "en"}/api/${version}`,
         withCredentials: true,
         // Don't set Content-Type here because it will be dynamic per request
     });

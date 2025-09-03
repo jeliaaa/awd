@@ -1,81 +1,126 @@
-// import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { addMonths, subMonths, format, addDays, isSameDay } from "date-fns";
+import ChevronRightIcon from '../assets/icons/chevron-right.svg?react';
+import { useApiStore } from "../store/apiStore";
 
-// const MONTH_NAMES = [
-//   "January", "February", "March", "April", "May", "June",
-//   "July", "August", "September", "October", "November", "December"
-// ];
-// const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const Calendar: React.FC = () => {
+  const { fetchEvents } = useApiStore();
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-// export default function Calendar() {
-//   const today = new Date();
-//   const [month, setMonth] = useState(today.getMonth());
-//   const [year, setYear] = useState(today.getFullYear());
+  const events = [
+    { id: 1, title: "Event 1", date: "2025-09-10", description: "Description for Event 1", color: "blue" },
+    { id: 2, title: "Event 2", date: "2025-09-10", description: "Description for Event 2", color: "blue" },
+    { id: 3, title: "Event 3", date: "2025-09-10", description: "Description for Event 3", color: "blue" },
+    { id: 4, title: "Event 4", date: "2025-09-15", description: "Description for Event 4", color: "green" },
+    { id: 5, title: "Event 5", date: "2025-09-20", description: "Description for Event 5", color: "red" },
+  ];
 
-//   const [noOfDays, setNoOfDays] = useState([]);
-//   const [blankDays, setBlankDays] = useState([]);
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
 
-//   const getNoOfDays = () => {
-//     const daysInMonth = new Date(year, month + 1, 0).getDate();
-//     const firstDayOfWeek = new Date(year, month).getDay();
+  const getEventsForDay = (day: Date) => {
+    return events.filter((e) => {
+      const eventDate = new Date(e.date);
+      return (
+        day.getFullYear() === eventDate.getFullYear() &&
+        day.getMonth() === eventDate.getMonth() &&
+        day.getDate() === eventDate.getDate()
+      );
+    });
+  };
 
-//     const blanks = Array.from({ length: firstDayOfWeek }, (_, i) => i) as any;
-//     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1) as any;
+  const monthStart = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+  const monthEnd = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
 
-//     setBlankDays(blanks);
-//     setNoOfDays(days);
-//   };
+  const allDates: Date[] = [];
+  let day = new Date(monthStart);
+  while (day <= monthEnd) {
+    allDates.push(new Date(day));
+    day = addDays(day, 1);
+  }
 
-//   const isToday = (date: number) => {
-//     const d = new Date(year, month, date);
-//     return new Date().toDateString() === d.toDateString();
-//   };
+  const handlePrevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
+  const handleNextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
 
-//   useEffect(() => {
-//     getNoOfDays();
-//   }, [month]);
+  const selectedEvents = selectedDate ? getEventsForDay(selectedDate) : [];
+  const today = new Date();
 
-//   return (
-//       <div className="bg-white rounded-lg">
-//         <div className="flex justify-between p-4">
-//           <div>
-//             <h2 className="text-xl font-bold text-gray-800">{MONTH_NAMES[month]} {year}</h2>
-//           </div>
-//           <div className="flex space-x-2">
-//             <button disabled={month === 0}
-//               className="p-2 hover:bg-gray-200 rounded disabled:opacity-30"
-//               onClick={() => setMonth(month - 1)}>
-//               ←
-//             </button>
-//             <button disabled={month === 11}
-//               className="p-2 hover:bg-gray-200 rounded disabled:opacity-30"
-//               onClick={() => setMonth(month + 1)}>
-//               →
-//             </button>
-//           </div>
-//         </div>
-
-//         <div className="grid grid-cols-7 text-center text-sm font-bold text-gray-500 border-t">
-//           {DAYS.map((day, idx) => <div key={idx} className="py-2">{day}</div>)}
-//         </div>
-
-//         <div className="grid grid-cols-7 border-t text-center">
-//           {blankDays.map((_, idx) => <div key={idx} className="py-6 border" />)}
-//           {noOfDays.map((date) => (
-//             <div key={date} className="py-2 border h-24 relative px-1">
-//               <div
-//                 className={`cursor-pointer inline-flex justify-center items-center rounded-full w-6 h-6 mx-auto mb-1 ${isToday(date) ? 'bg-blue-500 text-white' : 'hover:bg-blue-100 text-gray-700'}`}>
-//                 {date}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//   );
-// }
-
-const Calendar = () => {
   return (
-    <div>Calendar</div>
-  )
-}
-export default Calendar;  
+    <div className="w-full h-full p-4 mb-10">
+      {/* Header */}
+      <div className="flex gap-2 w-full md:w-1/2 justify-between mb-4">
+        <h2 className="text-xl font-bold">{format(currentMonth, "MMMM yyyy")}</h2>
+        <div className="flex gap-2">
+          <button onClick={handlePrevMonth} className="w-10 h-10 flex items-center justify-center cursor-pointer bg-gray-200 rounded">
+            <ChevronRightIcon className="text-primary mb-1 rotate-180 w-4 h-4 fill-primary" />
+          </button>
+          <button onClick={handleNextMonth} className="w-10 h-10 flex items-center justify-center cursor-pointer bg-gray-200 rounded">
+            <ChevronRightIcon className="text-primary mb-1 w-4 h-4 fill-primary" />
+          </button>
+        </div>
+      </div>
+
+      {/* Layout: Calendar + Description */}
+      <div className="flex flex-col md:flex-row gap-4">
+        {/* Calendar */}
+        <div className="w-full md:w-1/2">
+          <div className="flex flex-wrap gap-2">
+            {allDates.map((day) => {
+              const dayEvents = getEventsForDay(day);
+              const isToday = isSameDay(day, today);
+              const isSelected = selectedDate && isSameDay(day, selectedDate);
+
+              return (
+                <div
+                  key={day.toString()}
+                  onClick={() => setSelectedDate(day)}
+                  className={`
+                    h-20 aspect-square flex flex-col items-center justify-center cursor-pointer border rounded
+                    ${isToday ? "border-red-500" : "border-gray-300"}
+                    ${isSelected ? "bg-blue-100" : "bg-white"}
+                    relative
+                  `}
+                >
+                  <span className="font-bold">{format(day, "d")}</span>
+                  {dayEvents.length > 0 && (
+                    <div
+                      className="w-6 h-6 flex items-center justify-center text-white rounded-full absolute top-1 right-1 bg-primary text-xs"
+                    >
+                      {dayEvents.length}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Selected date description */}
+        <div className="w-full md:w-1/2">
+          {selectedDate && selectedEvents.length > 0 ? (
+            <div className="p-4 border rounded bg-gray-50">
+              <h2 className="font-bold mb-2">Events on {format(selectedDate, "PPP")}</h2>
+              {selectedEvents.map((event, idx) => (
+                <div key={idx} className="mb-4 border-b pb-2">
+                  <h3 className="font-semibold" style={{ color: event.color }}>
+                    {event.title}
+                  </h3>
+                  <p>{event.description || "No description"}</p>
+                  <p className="text-sm text-gray-500">Date: {format(new Date(event.date), "PPP")}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-4 border rounded bg-gray-50 text-gray-500">
+              Select a day to see events
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Calendar;
