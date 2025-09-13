@@ -5,6 +5,7 @@ import { routes } from "./routes";
 const Home = lazy(() => import('../pages/Home'));
 const About = lazy(() => import('../pages/About'));
 const Projects = lazy(() => import('../pages/Projects'));
+const ProjectsSingle = lazy(() => import('../pages/ProjectSingle'));
 const Donation = lazy(() => import('../pages/Donation'));
 const Stories = lazy(() => import('../pages/Stories'));
 const Calendar = lazy(() => import('../pages/Calendar'));
@@ -16,6 +17,7 @@ export const publicRoutes = [
     { showBreadcrumbs: false, title: "home", path: routes.home, component: Home },
     { showBreadcrumbs: true, title: "about", path: routes.about, component: About },
     { showBreadcrumbs: true, title: "projects", path: routes.projects, component: Projects },
+    { showBreadcrumbs: true, title: "projectsSingle", path: routes.projectsSingle, component: ProjectsSingle },
     { showBreadcrumbs: true, title: "donation", path: routes.dontaion, component: Donation },
     { showBreadcrumbs: true, title: "stories", path: routes.stories, component: Stories },
     { showBreadcrumbs: true, title: "calendar", path: routes.calendar, component: Calendar },

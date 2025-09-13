@@ -4,25 +4,19 @@ import ChevronRightIcon from '../assets/icons/chevron-right.svg?react';
 import { useApiStore } from "../store/apiStore";
 
 const Calendar: React.FC = () => {
-  const { fetchEvents } = useApiStore();
+  const { fetchEvents, events, eventSingle, fetchEventSingle } = useApiStore();
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [eventModal, setEventModal] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const events = [
-    { id: 1, title: "Event 1", date: "2025-09-10", description: "Description for Event 1", color: "blue" },
-    { id: 2, title: "Event 2", date: "2025-09-10", description: "Description for Event 2", color: "blue" },
-    { id: 3, title: "Event 3", date: "2025-09-10", description: "Description for Event 3", color: "blue" },
-    { id: 4, title: "Event 4", date: "2025-09-15", description: "Description for Event 4", color: "green" },
-    { id: 5, title: "Event 5", date: "2025-09-20", description: "Description for Event 5", color: "red" },
-  ];
 
   useEffect(() => {
     fetchEvents();
-  }, [fetchEvents]);
+  }, [fetchEvents, events]);
 
   const getEventsForDay = (day: Date) => {
     return events.filter((e) => {
-      const eventDate = new Date(e.date);
+      const eventDate = new Date(e.start_date);
       return (
         day.getFullYear() === eventDate.getFullYear() &&
         day.getMonth() === eventDate.getMonth() &&
@@ -30,6 +24,11 @@ const Calendar: React.FC = () => {
       );
     });
   };
+
+  const openEventModal = (id: number) => {
+    setEventModal(id);
+    fetchEventSingle(id);
+  }
 
   const monthStart = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
   const monthEnd = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
@@ -97,18 +96,30 @@ const Calendar: React.FC = () => {
           </div>
         </div>
 
+        {eventModal !== null &&
+          <div className="fixed w-dvw flex items-center justify-center z-50 h-dvh top-0 left-0 bg-black/40">
+            <div className="w-[70%] min-w-[300px] bg-white rounded-lg h-1/2">
+              <div className="w-full border-b flex justify-between p-5">
+                <span className="title">{eventSingle?.title}</span>
+                <button className="cursor-pointer hover:text-primary" onClick={() => setEventModal(null)}>დახურვა</button>
+              </div>
+              <div dangerouslySetInnerHTML={{ __html: eventSingle?.description || '' }} className="p-5 w-full break-words"></div>
+            </div>
+          </div>
+        }
+
         {/* Selected date description */}
         <div className="w-full md:w-1/2">
           {selectedDate && selectedEvents.length > 0 ? (
             <div className="p-4 border rounded bg-gray-50">
               <h2 className="font-bold mb-2">Events on {format(selectedDate, "PPP")}</h2>
               {selectedEvents.map((event, idx) => (
-                <div key={idx} className="mb-4 border-b pb-2">
+                <div key={idx} className="mb-4 border-b pb-2 cursor-pointer" onClick={() => openEventModal(event.id)}>
                   <h3 className="font-semibold" style={{ color: event.color }}>
                     {event.title}
                   </h3>
-                  <p>{event.description || "No description"}</p>
-                  <p className="text-sm text-gray-500">Date: {format(new Date(event.date), "PPP")}</p>
+                  <div dangerouslySetInnerHTML={{ __html: event.description || '' }} className="w-full break-words"></div>
+                  <p className="text-sm text-gray-500">Date: {format(new Date(event.start_date), "PPP")}</p>
                 </div>
               ))}
             </div>

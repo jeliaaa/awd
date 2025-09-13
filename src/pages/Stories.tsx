@@ -1,9 +1,8 @@
+import Videos from "./Videos"
 
 function Stories() {
     return (
-        <div>
-            შშმ ქალთა ისტორიები
-        </div>
+        <Videos />
     )
 }
 

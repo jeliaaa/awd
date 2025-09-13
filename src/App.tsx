@@ -1,10 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Accesebility from './components/Accesebility';
 import Breadcrumbs from './components/webNav/Breadcrumbs';
 import { publicRoutes } from './routes/publicRoutes';
-import TTSButton from './components/TTSButton';
 
 const App = () => {
   const location = useLocation();
@@ -17,7 +15,7 @@ const App = () => {
   return (
     <div className="relative flex flex-col items-center justify-center">
       <Header />
-      <TTSButton text='ტესტი გამარჯობა'/>
+      {/* <TTSButton text='ტესტი გამარჯობა'/> */}
       <div className="main_wrapper w-full flex flex-col items-center justify-start">
         {showBreadcrumbs && <Breadcrumbs />}
         <Routes>
@@ -27,7 +25,7 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
-      <Accesebility />
+      {/* <Accesebility /> */}
     </div>
   );
 };

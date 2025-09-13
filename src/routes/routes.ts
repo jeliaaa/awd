@@ -4,6 +4,7 @@ export const PublicRoutes = {
     home: "/",
     about: "/about",
     projects: "/projects",
+    projectsSingle: "/projects/:id",
     dontaion: "/donation",
     stories: "/stories",
     calendar: "/calendar",

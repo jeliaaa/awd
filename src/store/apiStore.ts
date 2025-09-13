@@ -1,22 +1,28 @@
 import { create } from 'zustand';
 import { apiV2 } from '../utils/axios';
-import type { IAbout, IEvent, IMember, INews, IProject } from '../types/types';
+import type { IAbout, IEvent, IMember, IBlog, IProject, IActivity, IVideo } from '../types/types';
 interface ApiStore {
     loading: boolean;
-    blog: INews[] | [];
+    blog: IBlog[] | [];
     about: IAbout | null;
     members: IMember[] | [];
     projects: IProject[] | [];
-    blogSingle: INews | null;
+    projectSingle: IProject | null;
+    blogSingle: IBlog | null;
     events: IEvent[] | [];
     eventSingle: IEvent | null;
+    activities: IActivity[] | [];
+    videos: IVideo[] | [];
     fetchAbout: () => Promise<void>;
     fetchMembers: () => Promise<void>;
     fetchProjects: (year: number) => Promise<void>;
+    fetchProjectsSingle: (id: number) => Promise<void>;
     fetchBlog: () => Promise<void>;
     fetchBlogSingle: (newsId: number) => Promise<void>;
     fetchEvents: () => Promise<void>;
     fetchEventSingle: (eventId: number) => Promise<void>;
+    fetchActivities: (limit: number, offset: number) => Promise<void>;
+    fetchVideos: () => Promise<void>;
 }
 
 export const useApiStore = create<ApiStore>((set) => ({
@@ -25,9 +31,12 @@ export const useApiStore = create<ApiStore>((set) => ({
     blog: [],
     members: [],
     projects: [],
+    projectSingle: null,
     blogSingle: null,
     events: [],
     eventSingle: null,
+    activities: [],
+    videos: [],
     fetchAbout: async () => {
         set({ loading: true })
         try {
@@ -58,6 +67,16 @@ export const useApiStore = create<ApiStore>((set) => ({
             set({ projects: res.data, loading: false })
         } catch (error) {
             console.error('Failed to fetch categories:', error);
+            set({ loading: false })
+        }
+    },
+    fetchProjectsSingle: async (id: number) => {
+        set({ loading: true })
+        try {
+            const res = await apiV2.get(`/project/details/${id}`);
+            set({ projectSingle: res.data, loading: false });
+        } catch (error) {
+            console.error('Failed to fetch quizzes:', error);
             set({ loading: false })
         }
     },
@@ -106,5 +125,28 @@ export const useApiStore = create<ApiStore>((set) => ({
             console.error('Failed to fetch quizzes:', error);
             set({ loading: false })
         }
-    }
+    },
+    fetchActivities: async (limit: number, offset: number) => {
+        set({ loading: true })
+        try {
+            const res = await apiV2.get(`/activity/list?limit=${limit}&offset=${offset}&ordering=-created_at`);
+            set({ activities: res.data, loading: false });
+        } catch (error) {
+            console.error('Failed to fetch quizzes:', error);
+            set({ loading: false })
+        }
+    },
+    fetchVideos: async () => {
+        set({ loading: true })
+        try {
+            const res = await apiV2.get('/video/list');
+            set({ videos: res.data });
+            set({ loading: false })
+
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+            set({ loading: false })
+
+        }
+    },
 }));

@@ -1,84 +1,37 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
-type BlogItem = {
-    id: number;
-    title: string;
-    date: string;
-    description: string;
-    image: string;
-};
-
-const blogData: BlogItem[] = [
-    {
-        id: 1,
-        title: "First Blog Post",
-        date: "2025-06-17",
-        description: "Short summary of the first blog post.",
-        image: "https://picsum.photos/400/300?random=1",
-    },
-    {
-        id: 2,
-        title: "Second Blog Post",
-        date: "2025-06-15",
-        description: "Short summary of the second blog post.",
-        image: "https://picsum.photos/400/300?random=2",
-    },
-    {
-        id: 3,
-        title: "Second Blog Post",
-        date: "2025-06-15",
-        description: "Short summary of the second blog post.",
-        image: "https://picsum.photos/400/300?random=5",
-    },
-    {
-        id: 4,
-        title: "Second Blog Post",
-        date: "2025-06-15",
-        description: "Short summary of the second blog post.",
-        image: "https://picsum.photos/400/300?random=2",
-    },
-    {
-        id: 5,
-        title: "Second Blog Post",
-        date: "2025-06-15",
-        description: "Short summary of the second blog post.",
-        image: "https://picsum.photos/400/300?random=2",
-    },
-    {
-        id: 6,
-        title: "Second Blog Post",
-        date: "2025-06-15",
-        description: "Short summary of the second blog post.",
-        image: "https://picsum.photos/400/300?random=2",
-    }
-    // Add more mock blog data...
-];
-
-const futureActivities = [
-    { id: 1, name: "Hackathon 2025", link: "/activity/1" },
-    { id: 2, name: "React Meetup", link: "/activity/2" },
-    { id: 3, name: "AI Conference", link: "/activity/3" },
-];
+import { useApiStore } from "../store/apiStore";
 
 export default function Blog() {
+    const { blog, fetchBlog, loading, fetchActivities, activities } = useApiStore();
+
+    useEffect(() => {
+        fetchBlog();
+        fetchActivities(3, 0);
+    }, [fetchBlog, fetchActivities])
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 3;
     const navigate = useNavigate();
 
-    const paginatedBlogs = blogData.slice(
+    const paginatedBlogs = blog.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
-    const totalPages = Math.ceil(blogData.length / itemsPerPage);
+    const totalPages = Math.ceil(blog.length / itemsPerPage);
+
+
+    if (loading) {
+        return <div>loading...</div>
+    }
 
     return (
         <div className="flex pt-15 flex-col lg:flex-row gap-6 p-4 pb-20 w-full mx-auto">
             {/* Main Section */}
             <div className="flex-1">
                 <h1 className="title font-bold mb-4">Latest News</h1>
-                <div className="grid grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {paginatedBlogs.map((item) => (
                         <motion.div
                             key={item.id}
@@ -88,14 +41,14 @@ export default function Blog() {
                             onClick={() => navigate(`/blog/${item.id}`)}
                         >
                             <img
-                                src={item.image}
+                                src={import.meta.env.VITE_BACKEND_APP_URL + item.cover_image?.image}
                                 alt={item.title}
                                 className="w-full h-48 object-cover"
                             />
                             <div className="p-4">
                                 <h2 className="font-semibold">{item.title}</h2>
-                                <p className="text-gray-500">{item.date}</p>
-                                <p className="mt-2 text-gray-700">{item.description}</p>
+                                <p className="text-gray-500">{item.created_at.slice(0, 10)}</p>
+                                <div dangerouslySetInnerHTML={{ __html: item.description || "" }} className="w-full overflow-hidden pr-1"></div>
                             </div>
                         </motion.div>
                     ))}
@@ -108,8 +61,8 @@ export default function Blog() {
                             key={i}
                             onClick={() => setCurrentPage(i + 1)}
                             className={`w-8 h-8 rounded cursor-pointer text-sm font-medium ${currentPage === i + 1
-                                    ? "bg-primary text-white"
-                                    : "bg-gray-200 text-gray-800 border-0 hover:bg-gray-300"
+                                ? "bg-primary text-white"
+                                : "bg-gray-200 text-gray-800 border-0 hover:bg-gray-300"
                                 }`}
                         >
                             {i + 1}
@@ -122,18 +75,19 @@ export default function Blog() {
             <aside className="lg:w-1/5 w-full border-primary border shadow-primary p-4">
                 <h2 className="title font-bold mb-4">Future Activities</h2>
                 <ul className="space-y-2 plain-text ">
-                    {futureActivities.map((activity) => (
+                    {activities.map((activity) => (
                         <li
                             key={activity.id}
                             className="text-primary hover:underline cursor-pointer"
-                            onClick={() => navigate(activity.link)}
                         >
-                            {activity.name}
-                            {">"}
+                            <Link to={`${activity.blog_id}`}>
+                                {activity.blog_title}
+                                {">"}
+                            </Link>
                         </li>
                     ))}
                 </ul>
             </aside>
-        </div>
+        </div >
     );
 }

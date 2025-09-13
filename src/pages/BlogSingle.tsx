@@ -1,51 +1,95 @@
-// import banner from '../assets/banner.jpg'; // adjust path if needed
+import { useEffect, useState } from "react";
+import { useApiStore } from "../store/apiStore";
+import { useParams } from "react-router-dom";
 
 const BlogSingle = () => {
+  const { id } = useParams();
+  const { blogSingle, fetchBlogSingle, loading } = useApiStore();
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (id) {
+      fetchBlogSingle(parseInt(id));
+    }
+  }, [id, fetchBlogSingle]);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
   return (
     <div className="w-full h-full p-6 space-y-6">
-      <div className="flex justify-between gap-4 max-[500px]:flex-col max-[500px]:items-center max-[500px]:gap-5">
-        <img src={'https://picsum.photos/300/100'} alt="banner" className="w-[60%] max-[500px]:w-full" />
-        <div className="w-[38%] max-[500px]:w-full max-[500px]:text-center">
-          <h2 className="title font-semibold text-primary">რა არის რეკლამა?</h2>
-          <h6 className="text-gray-500 plain-text">21.05.2023</h6>
+      {/* Top section */}
+      <div className="flex justify-between  flex-col md:flex-row items-center gap-5">
+        <img
+          src={blogSingle?.images[0].image}
+          alt="banner"
+          className="w-[50%] md:w-[30%] rounded-xl"
+        />
+        <div className="md:w-[68%] w-full text-center md:text-start">
+          <h2 className="title font-semibold text-primary">
+            {blogSingle?.title}
+          </h2>
+          <h6 className="text-gray-500 plain-text">
+            {blogSingle?.created_at.slice(0, 10)}
+          </h6>
         </div>
       </div>
 
-      <div className="space-y-4 plain-text">
-        <p>
-          იმისთვის, რომ მაყურებელს კარგად დაამახსოვრდეს რეკლამა, გრანდიოზულ რეკლამაში გამოიყენება მრავალი შემოქმედებითი ხერხი: იუმორი, სექსუალური მოტივები, საზოგადოებისთვის ცნობილი პიროვნებები (სელებრითი), ცხოველები ან გამოგონილი პერსონალები, ასევე ანიმაციური პერსონაჟები.
+      {/* Description */}
+      <div
+        className="w-full break-words"
+        dangerouslySetInnerHTML={{
+          __html: blogSingle?.description || "",
+        }}
+      ></div>
 
-        </p>
-        <p>
-          რეკლამა, რომელსაც მოაქვს გარკვეული კომერციული შეტყობინება, იზიდავს მომხმარებლის ყურადღებას, ხელს უწყობს პროდუქციის გასაღებას და დიდი ხნით ამახსოვრდება მომხმარებელს. გრანდიოზულმა რეკლამამ უნდა გაუძლოს დროს. მაგალითად ათეული წლის განმავლობაში მუშაობს მარლბოროს კოვბოის სახე მომხმარებელზე და მისი მეშვეობით მარლბორო დღესაც ყველაზე კარგად იყიდება მსოფლიოში, ასევე, ათეული წლები შემორჩა ფოლკსვაგენის რეკლამა;
-          შესრულების კულტურა: იდეის წარმატება დამოკიდებულია შესრულებაზე.
-        </p>
-        <p>ჩვენ და ყველა ჩვენგანს ყოველდღიურად უწევს რეკლამის ნახვა...</p>
-        <p>რეკლამა არის კომუნიკაცია მწარმოებელსა და მომხმარებელს შორის.</p>
-
-        <h4 className="title font-bold">რეკლამის სტანდარტული განმარტება შეიცავს ექვს კომპონენტს:</h4>
-        <ul className="list-disc list-inside space-y-2">
-          <li>რეკლამა - ესაა კომუნიკაციის მატერიალურად ანაზღაურებული ფორმა;</li>
-          <li>ინფორმაციაში იდენტიფიცირებულია სპონსორი;</li>
-          <li>მიზანია მომხმარებლის ქმედება (შეიძინოს);</li>
-          <li>განთავსება უნდა მოხდეს მასმედიაში;</li>
-          <li>მიზნობრივი აუდიტორიის მაქსიმუმი უნდა დაფაროს;</li>
-          <li>არაპერსონიფიცირებული მასობრივი კომუნიკაციაა.</li>
-        </ul>
-
-        <h4 className="title font-bold">რა არის გრანდიოზული რეკლამა?</h4>
-        <p>გრანდიოზულ რეკლამას მოაქვს შეტყობინება, იზიდავს ყურადღებას...</p>
-        <p>იმისთვის, რომ მაყურებელს დაამახსოვრდეს რეკლამა...</p>
-
-        <h4 className="title font-bold">სამი ვეშაპი, რომელზედაც დგას გრანდიოზული რეკლამა.</h4>
-        <p>
-          რა ხდის რეკლამას გრანდიოზულს?<br />
-          რატომ ხდება რეკლამა კლასიკა?<br />
-          როგორ ჩაიბეჭდება რეკლამა მომხმარებელზე?<br />
-          რატომ გრძელდება სარეკლამო კამპანია წლები?
-        </p>
-        <p>ყველა ფაქტორი ერთიანდება სამ ძირითად კატეგორიად – სტრატეგია</p>
+      {/* Horizontal Scroll Gallery */}
+      <div className="w-full overflow-x-auto overflow-y-hidden">
+        <div className="flex gap-4">
+          {blogSingle?.images?.map((img, idx) => (
+            <div
+              key={idx}
+              className="flex-shrink-0 cursor-pointer"
+              onClick={() => setSelectedImage(img.image)}
+            >
+              <img
+                src={img.image}
+                alt={img.alt_text}
+                className="h-[200px] w-auto rounded-xl border-2 border-background hover:scale-[1.03] transition-transform"
+              />
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div
+            className="relative max-w-4xl max-h-[90vh] p-4 bg-white rounded-xl shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              className="absolute top-2 right-2 bg-gray-700 text-white rounded-full px-3 py-1 hover:bg-gray-900"
+              onClick={() => setSelectedImage(null)}
+            >
+              ✕
+            </button>
+
+            {/* Image */}
+            <img
+              src={selectedImage}
+              alt="preview"
+              className="max-h-[80vh] max-w-full object-contain rounded-lg"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
