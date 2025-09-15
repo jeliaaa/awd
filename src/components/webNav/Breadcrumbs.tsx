@@ -14,20 +14,19 @@ const Breadcrumbs: React.FC = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between py-4 px-6 bg-background text-primary plain-text w-full">
-      <ol className="flex items-center space-x-2">
-        <li>
+    <div className="flex items-center justify-between py-4 px-6 bg-background text-primary plain-text w-full">
+      <div className="flex items-center space-x-2">
+        <div>
           <Link to="/" className="hover:underline">
-            {/* {t('main')} */}
-            მთავარი
+            {t('main')}
           </Link>
-        </li>
+        </div>
         {pathnames.map((name, index) => {
           const isLast = index === pathnames.length - 1;
           const path = generatePath(index);
 
           return (
-            <li key={index} className="flex items-center space-x-2">
+            <div key={index} className="flex items-center space-x-2">
               <span>/</span>
               {isLast ? (
                 <span className="text-gray-500">{t(name)}</span>
@@ -36,12 +35,12 @@ const Breadcrumbs: React.FC = () => {
                   {t(name)}
                 </Link>
               )}
-            </li>
+            </div>
           );
         })}
-      </ol>
+      </div>
       <BackBtn />
-    </nav>
+    </div>
   );
 };
 

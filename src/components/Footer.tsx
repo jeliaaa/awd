@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from "../../public/awd_logo.png"
+import Logo from "../assets/awd_logo.png"
+import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
+    const { t } = useTranslation();
     return (
         <footer className="flex flex-col w-full border-t border-primary">
             <div
@@ -11,43 +13,54 @@ const Footer: React.FC = () => {
                 <div className="md:w-1/3 flex justify-center md:justify-start pl-0 md:pl-12">
                     <span className="title font-bold select-none">
                         <Link to={'/'}>
-                            <img src={Logo} className='h-[30px]' />
+                            <img src={Logo} className='h-[70px]' />
                         </Link>
                     </span>
                 </div>
 
                 <div className="md:w-1/3" >
-                    <h3 className="title font-semibold mb-4">ლინკები</h3>
+                    <h3 className="title font-semibold mb-4">{t('links')}</h3>
                     <ul className="flex flex-col gap-2 plain-text">
                         <li>
-                            <a
-                                href="https://jobs.hrajara.gov.ge/"
+                            <Link
+                                to="/donate"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:underline"
                             >
-                                კალენდარი
-                            </a>
+                                {t('donate')}
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="https://jobs.hrajara.gov.ge/"
+                            <Link
+                                to="/calendar"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="hover:underline"
                             >
-                                სიახლეები
-                            </a>
+                                {t('calendar')}
+                            </Link>
                         </li>
+                        <li>
+                            <Link
+                                to="/blog"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:underline"
+                            >
+                                {t('blog')}
+                            </Link>
+                        </li>
+
                     </ul>
                 </div>
 
                 <div
                     className="md:w-1/3 flex justify-center md:justify-end flex-col text-right"
                 >
-                    <Link to={'/contact'} className="title font-semibold mb-4 hover:underline">კონტაქტი</Link>
+                    <Link to={'/contact'} className="title font-semibold mb-4 hover:underline">{t('contact')}</Link>
                     <div className="plain-text">
-                        <p>ბათუმი, მ. ლერმონტოვის ქ. #68</p>
+                        <p>{t('adress')}</p>
                         <p>info@gmail.com</p>
                         <p>+995 422 24 78 82</p>
                     </div>
@@ -64,7 +77,7 @@ const Footer: React.FC = () => {
                 <div className="flex justify-center gap-6 w-full sm:w-1/3 mt-3 sm:mt-0"></div>
 
                 <div className="flex justify-center sm:justify-end w-full sm:w-1/3 mt-3 sm:mt-0">
-                    All rights reserved &copy;
+                    {t('rightsReserved')} &copy;
                 </div>
             </div>
         </footer>

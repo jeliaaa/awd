@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useApiStore } from "../store/apiStore";
 import { useParams } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const BlogSingle = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const BlogSingle = () => {
   }, [id, fetchBlogSingle]);
 
   if (loading) {
-    return <div>loading...</div>;
+    return <Loader />;
   }
   return (
     <div className="w-full h-full p-6 space-y-6">

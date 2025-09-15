@@ -5,13 +5,13 @@ import MenuIcon from "../assets/icons/bars-solid.svg?react";
 import CloseIcon from "../assets/icons/xmark.svg?react";
 import LanguageDropdown from "./LanguageDropdown";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import Logo from "../../public/awd_logo.png"
+import Logo from "../assets/awd_logo.png"
 import { useTranslation } from "react-i18next";
 
 const navItems = [
   { label: "about", path: "/about" },
   { label: "projects", path: "/projects" },
-  { label: "donate", path: "/donation" },
+  { label: "donate", path: "/donate" },
   { label: "stories", path: "/stories" },
   { label: "calendar", path: "/calendar" },
   { label: "blog", path: "/blog" },
@@ -97,9 +97,9 @@ const Header = () => {
               key={item.label}
               to={item.path}
               onClick={handleLinkClick}
-              className="transition"
+              className="transition text-primary title"
             >
-              {item.label}
+              {t(item.label)}
             </Link>
           ))}
         </div>

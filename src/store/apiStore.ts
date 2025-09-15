@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { apiV2 } from '../utils/axios';
-import type { IAbout, IEvent, IMember, IBlog, IProject, IActivity, IVideo } from '../types/types';
+import type { IAbout, IEvent, IMember, IBlog, IProject, IActivity, IVideo, IContactInfo } from '../types/types';
 interface ApiStore {
     loading: boolean;
     blog: IBlog[] | [];
@@ -13,6 +13,8 @@ interface ApiStore {
     eventSingle: IEvent | null;
     activities: IActivity[] | [];
     videos: IVideo[] | [];
+    contactInfo: IContactInfo | null;
+    resMessage: string | null;
     fetchAbout: () => Promise<void>;
     fetchMembers: () => Promise<void>;
     fetchProjects: (year: number) => Promise<void>;
@@ -23,6 +25,8 @@ interface ApiStore {
     fetchEventSingle: (eventId: number) => Promise<void>;
     fetchActivities: (limit: number, offset: number) => Promise<void>;
     fetchVideos: () => Promise<void>;
+    sendEmail: (name: string, email: string, message: string) => Promise<void>;
+    fetchContactInfo:() => Promise<void>;
 }
 
 export const useApiStore = create<ApiStore>((set) => ({
@@ -37,6 +41,8 @@ export const useApiStore = create<ApiStore>((set) => ({
     eventSingle: null,
     activities: [],
     videos: [],
+    resMessage: null,
+    contactInfo: null,
     fetchAbout: async () => {
         set({ loading: true })
         try {
@@ -141,6 +147,34 @@ export const useApiStore = create<ApiStore>((set) => ({
         try {
             const res = await apiV2.get('/video/list');
             set({ videos: res.data });
+            set({ loading: false })
+
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+            set({ loading: false })
+
+        }
+    },
+    fetchContactInfo: async () => {
+        set({ loading: true })
+        try {
+            const res = await apiV2.get('/contact/info');
+            set({ contactInfo: res.data });
+            set({ loading: false })
+
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+            set({ loading: false })
+
+        }
+    },
+    sendEmail: async (name: string, email: string, message: string) => {
+        set({ loading: true })
+        try {
+            const res = await apiV2.post('/contact/create',
+                { name, email, message }
+            );
+            set({ resMessage: res.data.detail });
             set({ loading: false })
 
         } catch (error) {

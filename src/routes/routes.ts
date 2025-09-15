@@ -5,7 +5,7 @@ export const PublicRoutes = {
     about: "/about",
     projects: "/projects",
     projectsSingle: "/projects/:id",
-    dontaion: "/donation",
+    dontaion: "/donate",
     stories: "/stories",
     calendar: "/calendar",
     blog: "/blog",

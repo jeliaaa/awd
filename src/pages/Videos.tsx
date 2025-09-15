@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useApiStore } from "../store/apiStore";
+import Loader from "../components/Loader";
 
 function Videos() {
     const { loading, videos, fetchVideos } = useApiStore();
@@ -8,7 +9,7 @@ function Videos() {
     }, [fetchVideos])
     return (
         <div className="text-center w-full flex flex-col items-center gap-10">
-            {loading ? <p>loading</p> :
+            {loading ? <Loader /> :
                 <div className="w-full flex flex-wrap justify-center gap-5 p-10 pb-10 box-border">
                     {videos.map((video) => (
                         <a

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useApiStore } from "../store/apiStore";
+import Loader from "../components/Loader";
 
 export default function Blog() {
     const { blog, fetchBlog, loading, fetchActivities, activities } = useApiStore();
@@ -23,7 +24,7 @@ export default function Blog() {
 
 
     if (loading) {
-        return <div>loading...</div>
+        return <Loader />
     }
 
     return (

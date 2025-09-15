@@ -78,3 +78,14 @@ export interface IVideo {
     created_at: string,
     updated_at: string,
 }
+
+export interface ILocation {
+    name: string,
+    longitude: string,
+    latitude: string,
+}
+export interface IContactInfo {
+    phone: string,
+    email: string,
+    location: ILocation
+}

@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { useApiStore } from "../store/apiStore";
 import { Link, useParams } from "react-router-dom";
+import mainLogo from "../assets/awd_logo.png"
+import Loader from "../components/Loader";
 
 const BlogSingle = () => {
     const { id } = useParams();
@@ -17,16 +19,15 @@ const BlogSingle = () => {
 
 
     if (loading) {
-        return <div>loading...</div>;
+        return <Loader />;
     }
-    console.log(projectSingle);
 
     return (
         <div className="w-full h-full p-6 space-y-6">
             {/* Top section */}
             <div className="flex justify-between  flex-col md:flex-row items-center gap-5">
                 <img
-                    src={projectSingle?.image}
+                    src={projectSingle?.image || mainLogo}
                     alt="banner"
                     className="w-[50%] md:w-[30%] rounded-xl"
                 />
@@ -51,7 +52,7 @@ const BlogSingle = () => {
                 }}
             ></div>
 
-            <div className="w-full border-y py-5 flex items-center flex-col">
+            {projectSingle?.partner && <div className="w-full border-y py-5 flex items-center flex-col">
                 <span className="title text-center w-full">პარტნიორი:</span>
                 <div className="flex w-full gap-x-2 shadow-md p-3">
                     <img className="w-20 aspect-square object-cover" src={projectSingle?.partner?.image} alt="..." />
@@ -64,7 +65,7 @@ const BlogSingle = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>}
 
             {/* Horizontal Scroll Gallery */}
             {/* <div className="w-full overflow-x-auto overflow-y-hidden">

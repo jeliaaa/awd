@@ -18,7 +18,7 @@ export const publicRoutes = [
     { showBreadcrumbs: true, title: "about", path: routes.about, component: About },
     { showBreadcrumbs: true, title: "projects", path: routes.projects, component: Projects },
     { showBreadcrumbs: true, title: "projectsSingle", path: routes.projectsSingle, component: ProjectsSingle },
-    { showBreadcrumbs: true, title: "donation", path: routes.dontaion, component: Donation },
+    { showBreadcrumbs: true, title: "donate", path: routes.dontaion, component: Donation },
     { showBreadcrumbs: true, title: "stories", path: routes.stories, component: Stories },
     { showBreadcrumbs: true, title: "calendar", path: routes.calendar, component: Calendar },
     { showBreadcrumbs: true, title: "blog", path: routes.blog, component: Blog },

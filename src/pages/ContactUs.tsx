@@ -1,63 +1,92 @@
+import { useEffect, useState, type FormEvent } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useTranslation } from "react-i18next";
 import "leaflet/dist/leaflet.css";
+import { useApiStore } from "../store/apiStore";
 
 const ContactUs = () => {
-    // useEffect(() => {
-    //     // Fix marker icon issue with Leaflet
-    //     delete L.Icon.Default.prototype._getIconUrl;
-    //     L.Icon.Default.mergeOptions({
-    //         iconRetinaUrl:
-    //             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-    //         iconUrl:
-    //             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-    //         shadowUrl:
-    //             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-    //     });
-    // }, []);
+    const { t } = useTranslation();
+    const { sendEmail, resMessage, fetchContactInfo, contactInfo } = useApiStore();
+
+    // State for form values
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+
+    useEffect(() => {
+        fetchContactInfo();
+    }, [fetchContactInfo]);
+
+    // Gather values and handle submit
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        sendEmail(name, email, message).then(() => alert(resMessage)).catch(() => alert("დაფიქსირდა შეცდომა"));
+        setName("");
+        setEmail("");
+        setMessage("");
+    };
+
+    // Safely parse coordinates (fallback to Batumi if missing/invalid)
+    const latitude = contactInfo?.location?.latitude
+        ? parseFloat(contactInfo.location.latitude)
+        : 41.6434;
+    const longitude = contactInfo?.location?.longitude
+        ? parseFloat(contactInfo.location.longitude)
+        : 41.6367;
 
     return (
         <div className="flex flex-col items-center p-4 md:p-16 w-full">
-            {/* Header */}
-            <div className="w-full text-center py-6">
-                <h1 className="text-4xl font-bold text-gray-800">Contact Us</h1>
-            </div>
-
             {/* Form and Info */}
             <div className="w-full px-15 grid md:grid-cols-2 gap-6 bg-white py-6 rounded-xl shadow-md">
                 {/* Contact Form */}
-                <form className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        placeholder="Your Name"
+                        placeholder={t("form.name")}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         className="p-3 border rounded-md"
                     />
                     <input
                         type="email"
-                        placeholder="Your Email"
+                        placeholder={t("form.email")}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="p-3 border rounded-md"
                     />
                     <textarea
-                        placeholder="Your Message"
+                        placeholder={t("form.message")}
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
                         className="p-3 border rounded-md resize-none"
                     />
-                    <button className="bg-primary/90 cursor-pointer text-white py-2 px-4 rounded hover:bg-primary">
-                        Send Message
+                    <button
+                        type="submit"
+                        className="bg-primary/90 cursor-pointer text-white py-2 px-4 rounded hover:bg-primary"
+                    >
+                        {t("form.send")}
                     </button>
                 </form>
 
                 {/* Contact Information */}
                 <div className="flex flex-col justify-center gap-4">
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-700 underline">Email</h2>
-                        <p className="text-gray-600">contact@example.com</p>
+                        <h2 className="text-xl font-semibold text-gray-700 underline">
+                            {t("info.email")}
+                        </h2>
+                        <p className="text-gray-600">{contactInfo?.email}</p>
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-700 underline">Phone</h2>
-                        <p className="text-gray-600">+1 (123) 456-7890</p>
+                        <h2 className="text-xl font-semibold text-gray-700 underline">
+                            {t("info.phone")}
+                        </h2>
+                        <p className="text-gray-600">{contactInfo?.phone}</p>
                     </div>
                     <div>
-                        <h2 className="text-xl font-semibold text-gray-700 underline">Address</h2>
-                        <p className="text-gray-600">123 Main Street, Your City, Country</p>
+                        <h2 className="text-xl font-semibold text-gray-700 underline">
+                            {t("info.address")}
+                        </h2>
+                        <p className="text-gray-600">{contactInfo?.location?.name}</p>
                     </div>
                 </div>
             </div>
@@ -65,16 +94,14 @@ const ContactUs = () => {
             {/* Map */}
             <div className="w-full mt-8 h-64 md:h-96 rounded-xl z-2 overflow-hidden">
                 <MapContainer
-                    center={[41.6434, 41.6367]} // Example: Batumi
+                    center={[latitude, longitude]}
                     zoom={15}
                     scrollWheelZoom={false}
                     style={{ height: "100%", width: "100%" }}
                 >
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker position={[41.6434, 41.6367]}>
-                        <Popup>We are here!</Popup>
+                    <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                    <Marker position={[latitude, longitude]}>
+                        <Popup>{t("popup")}</Popup>
                     </Marker>
                 </MapContainer>
             </div>
