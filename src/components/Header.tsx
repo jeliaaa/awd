@@ -5,13 +5,14 @@ import MenuIcon from "../assets/icons/bars-solid.svg?react";
 import CloseIcon from "../assets/icons/xmark.svg?react";
 import LanguageDropdown from "./LanguageDropdown";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import Logo from "../../public/awd_logo.png"
 
 const navItems = [
   { label: "ჩვენს შესახებ", path: "/about" },
-  { label: "პროექტები", path: "/projects"},
+  { label: "პროექტები", path: "/projects" },
   { label: "დონაცია", path: "/donation" },
-  { label: "შშმ ქალთა ისტორიები", path: "/stories"},
-  { label: "კალენდარი", path: "/calendar"},
+  { label: "შშმ ქალთა ისტორიები", path: "/stories" },
+  { label: "კალენდარი", path: "/calendar" },
   { label: "ბლოგი", path: "/blog" },
   { label: "კონტაქტი", path: "/contact" },
 
@@ -31,7 +32,7 @@ const Header = () => {
   return (
     <div className="w-full z-50 bg-background sticky top-0 backdrop-blur-md shadow-sm">
       <motion.div
-        animate={{ 
+        animate={{
           position: isScrolled ? "fixed" : "relative",
           y: isScrolled ? "-100%" : 0
         }}
@@ -39,7 +40,9 @@ const Header = () => {
         className="w-full p-10 flex z-50 items-center justify-between bg-background"
       >
         <div className="title font-bold text-primary text-lg">
-          <Link to="/">Logo</Link>
+          <Link to="/">
+            <img src={Logo} />
+          </Link>
         </div>
         <LanguageDropdown />
       </motion.div>
