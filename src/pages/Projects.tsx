@@ -28,7 +28,7 @@ function Projects() {
                     {projects.map((project) => (
                         <Link to={`${project.id}`} className="md:w-[30%] hover:-translate-y-2 group box-border w-full flex shadow-md flex-col rounded-lg">
                             <img src={project.image} alt={project.name} className="w-full rounded-t-lg h-1/2 object-cover object-center" />
-                            <div className="flex plain-text h-1/2 items-start group-hover:bg-primary/5 transition-all delay-150 flex-col gap-2 p-4">
+                            <div className="flex plain-text h-fit items-start group-hover:bg-primary/5 transition-all delay-150 flex-col gap-2 p-4">
                                 <div className="flex w-full justify-between">
                                     <span>{project.date}</span>
                                     <span className="text-primary">{project.location}</span>
