@@ -6,15 +6,16 @@ import CloseIcon from "../assets/icons/xmark.svg?react";
 import LanguageDropdown from "./LanguageDropdown";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Logo from "../../public/awd_logo.png"
+import { useTranslation } from "react-i18next";
 
 const navItems = [
-  { label: "ჩვენს შესახებ", path: "/about" },
-  { label: "პროექტები", path: "/projects" },
-  { label: "დონაცია", path: "/donation" },
-  { label: "შშმ ქალთა ისტორიები", path: "/stories" },
-  { label: "კალენდარი", path: "/calendar" },
-  { label: "ბლოგი", path: "/blog" },
-  { label: "კონტაქტი", path: "/contact" },
+  { label: "about", path: "/about" },
+  { label: "projects", path: "/projects" },
+  { label: "donate", path: "/donation" },
+  { label: "stories", path: "/stories" },
+  { label: "calendar", path: "/calendar" },
+  { label: "blog", path: "/blog" },
+  { label: "contact", path: "/contact" },
 
 ];
 
@@ -22,6 +23,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
+  const { t } = useTranslation();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
@@ -63,7 +65,7 @@ const Header = () => {
             to={item.path}
             className="hover:underline transition text-center"
           >
-            {item.label}
+            {t(item.label)}
           </Link>
         ))}
       </header>

@@ -94,3 +94,7 @@ footer {
     scrollbar-width: thin;
     scrollbar-face-color: red;
 }
+
+ul{
+    list-style: circle;
+}

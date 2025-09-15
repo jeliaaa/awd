@@ -1,3 +1,13 @@
 {
-    
+    "about" : "About Us",
+    "projects" : "Projects",
+    "donate" : "Donate",
+    "stories" : "Stories of disabled women",
+    "calendar" : "Calendar",
+    "blog" : "Blog",
+    "contact" : "Contact Us",
+    "back": "Back",
+    "shortInfo": "Short Information",
+    "team": "Team",
+    "links": "Links"
 }
