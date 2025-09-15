@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from "../../public/awd_logo.png"
 
 const Footer: React.FC = () => {
     return (
@@ -8,7 +9,11 @@ const Footer: React.FC = () => {
                 className="flex flex-col md:flex-row justify-between p-12 md:p-14 gap-8"
             >
                 <div className="md:w-1/3 flex justify-center md:justify-start pl-0 md:pl-12">
-                    <span className="title font-bold select-none">AWD LOGO</span>
+                    <span className="title font-bold select-none">
+                        <Link to={'/'}>
+                            <img src={Logo} className='h-[30px]' />
+                        </Link>
+                    </span>
                 </div>
 
                 <div className="md:w-1/3" >
