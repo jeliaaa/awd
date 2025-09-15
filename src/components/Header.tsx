@@ -41,7 +41,7 @@ const Header = () => {
       >
         <div className="title font-bold text-primary text-lg">
           <Link to="/">
-            <img src={Logo} />
+            <img className="h-[30px]" src={Logo} />
           </Link>
         </div>
         <LanguageDropdown />
