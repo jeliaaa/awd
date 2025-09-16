@@ -88,7 +88,7 @@ const Header = () => {
       <div
         className={clsx(
           "md:hidden overflow-hidden transition-all bg-background duration-300 ease-in-out",
-          menuOpen ? "max-h-60 opacity-100 px-4 pb-4" : "max-h-0 opacity-0 px-4"
+          menuOpen ? "max-h-70 opacity-100 px-4 pb-4" : "max-h-0 opacity-0 px-4"
         )}
       >
         <div className="flex flex-col space-y-2">
