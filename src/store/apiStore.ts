@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { apiV2 } from '../utils/axios';
-import type { IAbout, IEvent, IMember, IBlog, IProject, IActivity, IVideo, IContactInfo } from '../types/types';
+import type { IAbout, IEvent, IMember, IBlog, IProject, IActivity, IVideo, IContactInfo, StoryVideo } from '../types/types';
 interface ApiStore {
     loading: boolean;
     blog: IBlog[] | [];
@@ -13,6 +13,7 @@ interface ApiStore {
     eventSingle: IEvent | null;
     activities: IActivity[] | [];
     videos: IVideo[] | [];
+    stories: StoryVideo[] | [];
     contactInfo: IContactInfo | null;
     resMessage: string | null;
     fetchAbout: () => Promise<void>;
@@ -25,6 +26,7 @@ interface ApiStore {
     fetchEventSingle: (eventId: number) => Promise<void>;
     fetchActivities: (limit: number, offset: number) => Promise<void>;
     fetchVideos: () => Promise<void>;
+    fetchStories: () => Promise<void>;
     sendEmail: (name: string, email: string, message: string) => Promise<void>;
     fetchContactInfo:() => Promise<void>;
 }
@@ -41,6 +43,7 @@ export const useApiStore = create<ApiStore>((set) => ({
     eventSingle: null,
     activities: [],
     videos: [],
+    stories: [],
     resMessage: null,
     contactInfo: null,
     fetchAbout: async () => {
@@ -147,6 +150,19 @@ export const useApiStore = create<ApiStore>((set) => ({
         try {
             const res = await apiV2.get('/video/list');
             set({ videos: res.data });
+            set({ loading: false })
+
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+            set({ loading: false })
+
+        }
+    },
+    fetchStories: async () => {
+        set({ loading: true })
+        try {
+            const res = await apiV2.get('/story/list');
+            set({ stories: res.data });
             set({ loading: false })
 
         } catch (error) {

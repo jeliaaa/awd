@@ -7,6 +7,7 @@ import LanguageDropdown from "./LanguageDropdown";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Logo from "../assets/awd_logo.png"
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 const navItems = [
   { label: "about", path: "/about" },
@@ -46,6 +47,7 @@ const Header = () => {
             <img className="h-[30px]" src={Logo} />
           </Link>
         </div>
+        <Link className="bg-gray-200 md:block hidden title text-primary rounded-2xl p-3" to={`https://adaptive.aowd.ge/${i18n.language}`}>ადაპტირებული ვებ-გვერდი</Link>
         <LanguageDropdown />
       </motion.div>
 
@@ -71,7 +73,8 @@ const Header = () => {
       </header>
 
       {/* Mobile Menu Button */}
-      <div className="md:hidden flex justify-end px-5">
+      <div className="md:hidden flex justify-between pb-5 px-5">
+        <Link className="bg-gray-200 md:hidden title text-primary rounded-2xl p-3" to={`https://adaptive.aowd.ge/${i18n.language}`}>ადაპტირებული ვებ-გვერდი</Link>
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
           className="cursor-pointer my-2"

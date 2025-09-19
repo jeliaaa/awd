@@ -79,6 +79,15 @@ export interface IVideo {
     updated_at: string,
 }
 
+export interface StoryVideo {
+    id:number,
+    title: string,
+    description: string,
+    created_at: string,
+    updated_at: string,
+    videos: IVideo[] | []
+}
+
 export interface ILocation {
     name: string,
     longitude: string,
