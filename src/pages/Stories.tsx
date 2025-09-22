@@ -10,18 +10,23 @@ function Stories() {
         fetchStories();
     }, [fetchStories]);
 
+    console.log(stories);
+
+
     const getYouTubeId = (url: string) => {
         try {
-            return url.split('/')[3].split("=")[1];
+            const params = new URL(url).searchParams;
+            return params.get("v"); // gets only the video ID
         } catch {
             return null;
         }
     };
 
+
     return (
         <div className="text-center  w-full flex flex-col items-center gap-10">
             {loading ? <Loader /> :
-                <div className="w-full flex flex-wrap justify-center gap-5 p-10 pb-10 box-border">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-10 pb-10 box-border">
                     {stories.map((story) => {
                         const videoId = getYouTubeId(story.videos[0].url);
                         return (
@@ -44,12 +49,12 @@ function Stories() {
                                 </div>
                                 <div className="p-4">
                                     <h2 className="title font-semibold text-dark-color mb-1">
-                                        {story.title}
+                                        {story.videos[0].title}
                                     </h2>
                                     <div
                                         className="w-full break-words"
                                         dangerouslySetInnerHTML={{
-                                            __html: story.description || ""
+                                            __html: story.videos[0].description || ""
                                         }}
                                     ></div>
                                 </div>
