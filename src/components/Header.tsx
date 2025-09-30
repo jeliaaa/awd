@@ -8,17 +8,7 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Logo from "../assets/awd_logo.png"
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
-
-const navItems = [
-  { label: "about", path: "/about" },
-  { label: "projects", path: "/projects" },
-  { label: "donate", path: "/donate" },
-  { label: "stories", path: "/stories" },
-  { label: "calendar", path: "/calendar" },
-  { label: "blog", path: "/blog" },
-  { label: "contact", path: "/contact" },
-
-];
+import { navItems } from "../routes/routes";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
