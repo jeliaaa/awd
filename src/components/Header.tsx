@@ -63,8 +63,8 @@ const Header = () => {
       </header>
 
       {/* Mobile Menu Button */}
-      <div className="md:hidden flex justify-between pb-5 px-5">
-        <Link className="bg-gray-200 md:hidden title text-primary rounded-2xl p-3" to={`https://adaptive.aowd.ge/${i18n.language}`}>ადაპტირებული ვებ-გვერდი</Link>
+      <div className="md:hidden flex py-4 justify-between pb-5 px-5">
+        <Link className="bg-gray-200 md:hidden title text-primary rounded-2xl p-3 text-center" to={`https://adaptive.aowd.ge/${i18n.language}`}>ადაპტირებული ვებ-გვერდი</Link>
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
           className="cursor-pointer my-2"

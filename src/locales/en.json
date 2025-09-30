@@ -24,5 +24,23 @@
         "phone": "Phone",
         "address": "Address"
     },
-    "popup": "We are here!"
+    "popup": "We are here!",
+    "months": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+    },
+    "events": "Events",
+    "details": "Details",
+    "close": "Close",
+    "events_not_found": "Events not found"
 }
