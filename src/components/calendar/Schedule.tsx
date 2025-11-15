@@ -6,7 +6,8 @@ interface ScheduleProps {
   title: string;
   startDate: string;
   endDate?: string;
-  description: any;
+  description: string | undefined;
+  color: string | undefined;
   isLast?: boolean;
   onClick: () => void;
 }
@@ -18,19 +19,20 @@ function Schedule({
   description,
   isLast,
   onClick,
+  color
 }: ScheduleProps) {
   const { t } = useTranslation();
   return (
     <div className="flow-root mt-16">
       <div className="-my-4 divide-y divide-gray-700">
         <div className={clsx(description && "pb-10")}>
-          <div className="flex flex-row items-center justify-between py-4 gap-6">
-            <div className="flex items-center gap-6">
-              <p className="sm:pl-10 text-lg font-normal text-gray-500 shrink-0">
-                {format(new Date(startDate), "HH:mm")}
-                {endDate && ` - ${format(new Date(endDate), "HH:mm")}`}
+          <div className="flex flex-row flex-wrap items-center justify-between py-4 gap-6">
+            <div className="flex flex-wrap items-center gap-6">
+              <p className="sm:pl-10 text-lg font-normal shrink-0" style={{color:`${color}`}}>
+                {format(new Date(startDate), "yyyy-MM-dd")}
+                {endDate && ` >  ${format(new Date(endDate), "yyyy-MM-dd")}`}
               </p>
-              <h3 className="text-lg font-semibold text-primary">
+              <h3 className={`text-lg font-semibold`} style={{color:`${color}`}}>
                 <button onClick={onClick} className="cursor-pointer">
                   {title}
                 </button>
@@ -38,12 +40,13 @@ function Schedule({
             </div>
             <button
               onClick={onClick}
-              className="px-4 py-2 cursor-pointer bg-primary rounded-lg text-white"
+              style={{backgroundColor:`${color}`}}
+              className="px-4 py-2 cursor-pointer rounded-lg text-white"
             >
               {t("details")}
             </button>
           </div>
-          {description}
+          {description && description}
         </div>
         {!isLast && <div></div>}
       </div>
