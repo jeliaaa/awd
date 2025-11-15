@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/awd_logo.png"
 import { useTranslation } from 'react-i18next';
+import { navItems } from '../routes/routes';
 
 const Footer: React.FC = () => {
     const { t } = useTranslation();
@@ -21,42 +22,23 @@ const Footer: React.FC = () => {
                 <div className="md:w-1/3" >
                     <h3 className="title font-semibold mb-4">{t('links')}</h3>
                     <ul className="flex flex-col gap-2 plain-text">
-                        <li>
-                            <Link
-                                to="/donate"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:underline"
-                            >
-                                {t('donate')}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/calendar"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:underline"
-                            >
-                                {t('calendar')}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/blog"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:underline"
-                            >
-                                {t('blog')}
-                            </Link>
-                        </li>
-
+                        {navItems.map((item, i) => (
+                            <li key={i}>
+                                <Link
+                                    to={item.path}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:underline"
+                                >
+                                    {t(item.label)}
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
                 <div
-                    className="md:w-1/3 flex justify-center md:justify-end flex-col text-right"
+                    className="md:w-1/3 flex justify-center md:justify-start flex-col text-right"
                 >
                     <Link to={'/contact'} className="title font-semibold mb-4 hover:underline">{t('contact')}</Link>
                     <div className="plain-text">

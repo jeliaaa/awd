@@ -8,17 +8,7 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Logo from "../assets/awd_logo.png"
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
-
-const navItems = [
-  { label: "about", path: "/about" },
-  { label: "projects", path: "/projects" },
-  { label: "donate", path: "/donate" },
-  { label: "stories", path: "/stories" },
-  { label: "calendar", path: "/calendar" },
-  { label: "blog", path: "/blog" },
-  { label: "contact", path: "/contact" },
-
-];
+import { navItems } from "../routes/routes";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -73,8 +63,8 @@ const Header = () => {
       </header>
 
       {/* Mobile Menu Button */}
-      <div className="md:hidden flex justify-between pb-5 px-5">
-        <Link className="bg-gray-200 md:hidden title text-primary rounded-2xl p-3" to={`https://adaptive.aowd.ge/${i18n.language}`}>ადაპტირებული ვებ-გვერდი</Link>
+      <div className="md:hidden flex py-4 justify-between pb-5 px-5">
+        <Link className="bg-gray-200 md:hidden title text-primary rounded-2xl p-3 text-center" to={`https://adaptive.aowd.ge/${i18n.language}`}>ადაპტირებული ვებ-გვერდი</Link>
         <button
           onClick={() => setMenuOpen((prev) => !prev)}
           className="cursor-pointer my-2"

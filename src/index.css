@@ -68,24 +68,18 @@
     display: flex;
     justify-content: start;
     align-items: center;
-    background-color: #5E35B1;
     min-height: 70dvh;
     background-color: #FAFAFA;
 }
 
 footer {
-    background-color: #FAFAFA;
-    color: #5E35B1
+    background-color: #5E35B1;
+    color: #FAFAFA;
 }
 
 @media (min-width: 1600px) {
     .main_wrapper {
         width: 1600px;
-    }
-
-    footer {
-        background-color: #5E35B1;
-        color: #FAFAFA
     }
 }
 
