@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import { useEffect, useState } from "react";
+
+import { useEffect } from "react";
 import { useApiStore } from "../store/apiStore";
 import Loader from "../components/Loader";
 
@@ -36,10 +36,11 @@ const About = () => {
     }
   ]
 
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const activeTab = 0
+  // const [activeTab, setActiveTab] = useState<number>(0);
   return (
     <div className="bg-background px-6 py-12 space-y-10 w-full h-full">
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <div className="flex gap-x-3">
           {tabs.map(tab => (
             <button onClick={() => setActiveTab(tab.id)} key={tab.id} className={clsx(
@@ -48,7 +49,7 @@ const About = () => {
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
       <div>
         {loading ? <Loader /> : tabs[activeTab].elem}
       </div>

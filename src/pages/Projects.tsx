@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useApiStore } from "../store/apiStore";
 import { Link } from "react-router-dom";
-import mainLogo from "../assets/awd_logo.png"
 import Loader from "../components/Loader";
 
 function Projects() {
@@ -29,13 +28,13 @@ function Projects() {
                 <div className="w-full flex flex-wrap justify-center gap-5 p-10 pb-10 box-border">
                     {projects.map((project) => (
                         <Link to={`${project.id}`} className="md:w-[30%] hover:-translate-y-2 group box-border w-full flex shadow-md flex-col rounded-lg">
-                            <img src={project.image || mainLogo } alt={project.name} className="w-full rounded-t-lg h-[200px] object-cover object-center" />
+                            {/* <img src={project.image || mainLogo } alt={project.name} className="w-full rounded-t-lg h-[200px] object-cover object-center" /> */}
                             <div className="flex plain-text h-fit items-start group-hover:bg-primary/5 transition-all delay-150 flex-col gap-2 p-4">
                                 <div className="flex w-full justify-between">
                                     <span>{project.date}</span>
                                     <span className="text-primary">{project.location}</span>
                                 </div>
-                                <span className="title">{project.name} {project.duration}</span>
+                                <span className="title">{project.name}</span>
                                 <span className="w-full text-wrap break-words text-start">{project.description}</span>
                             </div>
                         </Link>
