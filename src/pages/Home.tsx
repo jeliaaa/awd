@@ -15,11 +15,11 @@ type HeroBoxProps = {
 };
 
 const statsData = [
-  { number: 120, label: 'კომპანია' },
-  { number: 1200, label: 'დასაქმებული' },
-  { number: 3521, label: 'მიიღეს რჩევა' },
-  { number: 1178, label: 'ორგანიზაცია' },
-  { number: 3010, label: 'მაძიებელი' },
+  { number: 10, label: 'მიმდინარე სასამართლო ქეისი შშმ ქალის მიმართ ძალადობის საკითხზე' },
+  { number: 850, label: 'ბენეფიციარი დაარსების დღიდან' },
+  { number: 27, label: 'დასაქმებული ქალი' },
+  { number: 12, label: 'ქალმა დაიწყო განათლება' },
+  { number: 13, label: 'დასრულებული პროექტი' },
 ];
 
 const HeroBox: React.FC<HeroBoxProps> = ({ heading, text, image, to }) => (

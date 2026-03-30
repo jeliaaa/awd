@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Breadcrumbs from './components/webNav/Breadcrumbs';
 import { publicRoutes } from './routes/publicRoutes';
+import DonateButton from './components/DonateButton';
 
 const App = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const App = () => {
           ))}
         </Routes>
       </div>
+      <DonateButton />
       <Footer />
       {/* <Accesebility /> */}
     </div>

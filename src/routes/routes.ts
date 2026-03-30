@@ -20,9 +20,8 @@ export const routes = {
 export const navItems = [
   { label: "about", path: "/about" },
   { label: "projects", path: "/projects" },
-  { label: "donate", path: "/donate" },
   { label: "stories", path: "/stories" },
   { label: "calendar", path: "/calendar" },
-  { label: "blog", path: "/blog" },
+  { label: "blog", path: "/blog", hasDropdown: true },
   { label: "contact", path: "/contact" },
 ];

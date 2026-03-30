@@ -41,6 +41,12 @@ export interface IBlogImage {
     uploaded_at: string
 }
 
+export interface IBlogCategories {
+    id: number
+    name: string
+    slug: string
+    description: string
+}
 
 export interface IBlog {
     id: number,

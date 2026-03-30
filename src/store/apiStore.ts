@@ -1,8 +1,10 @@
 import { create } from 'zustand';
 import { apiV2 } from '../utils/axios';
-import type { IAbout, IEvent, IMember, IBlog, IProject, IActivity, IVideo, IContactInfo, StoryVideo } from '../types/types';
+import type { IAbout, IEvent, IMember, IBlog, IProject, IActivity, IVideo, IContactInfo, StoryVideo, IBlogCategories } from '../types/types';
+
 interface ApiStore {
     loading: boolean;
+    blog_categories: IBlogCategories[] | [];
     blog: IBlog[] | [];
     about: IAbout | null;
     members: IMember[] | [];
@@ -16,11 +18,12 @@ interface ApiStore {
     stories: StoryVideo[] | [];
     contactInfo: IContactInfo | null;
     resMessage: string | null;
+    fetchBlogCategories: () => Promise<void>;
     fetchAbout: () => Promise<void>;
     fetchMembers: () => Promise<void>;
     fetchProjects: (year: number) => Promise<void>;
     fetchProjectsSingle: (id: number) => Promise<void>;
-    fetchBlog: () => Promise<void>;
+    fetchBlog: (category_slug: string | undefined, search: string | undefined) => Promise<void>;
     fetchBlogSingle: (newsId: number) => Promise<void>;
     fetchEvents: () => Promise<void>;
     fetchEventSingle: (eventId: number) => Promise<void>;
@@ -34,6 +37,7 @@ interface ApiStore {
 export const useApiStore = create<ApiStore>((set) => ({
     loading: false,
     about: null,
+    blog_categories: [],
     blog: [],
     members: [],
     projects: [],
@@ -46,6 +50,20 @@ export const useApiStore = create<ApiStore>((set) => ({
     stories: [],
     resMessage: null,
     contactInfo: null,
+
+    fetchBlogCategories: async () => {
+        set({ loading: true })
+        try {
+            const res = await apiV2.get('/blog/categories');
+            set({ blog_categories: res.data });
+            set({ loading: false })
+        }
+        catch (error) {
+            console.error('Failed to fetch categories:', error);
+            set({ loading: false })
+        }
+    },
+
     fetchAbout: async () => {
         set({ loading: true })
         try {
@@ -89,17 +107,29 @@ export const useApiStore = create<ApiStore>((set) => ({
             set({ loading: false })
         }
     },
-    fetchBlog: async () => {
-        set({ loading: true })
+    fetchBlog: async (category_slug?: string, search?: string) => {
         try {
-            const res = await apiV2.get('/blog/list');
-            set({ blog: res.data });
-            set({ loading: false })
+            set({ loading: true });
 
+            const params = new URLSearchParams();
+
+            if (category_slug) {
+                params.append("category_slug", category_slug);
+            }
+
+            if (search) {
+                params.append("search", search);
+            }
+
+            const query = params.toString();
+            const url = query ? `/blog/list?${query}` : "/blog/list";
+
+            const res = await apiV2.get(url);
+
+            set({ blog: res.data, loading: false });
         } catch (error) {
-            console.error('Failed to fetch categories:', error);
-            set({ loading: false })
-
+            console.error("Failed to fetch blog", error);
+            set({ loading: false });
         }
     },
     fetchBlogSingle: async (newsId: number) => {
