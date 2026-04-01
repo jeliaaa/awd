@@ -7,6 +7,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Link } from 'react-router-dom';
 
+import Image1 from '../assets/images/474656175_636059092426686_6626033741459182921_n.jpg'
+import Image2 from '../assets/images/475298315_639262962106299_2393968445266418199_n.jpg'
+import Image3 from '../assets/images/477307551_654598196995109_9179134437802262258_n.jpg'
+import Image4 from '../assets/images/476835168_654603073661288_1960006179725840025_n.jpg'
+import Image5 from '../assets/images/477792317_654875303634065_4687244993273870379_n.jpg'
 type HeroBoxProps = {
   heading: string;
   text: string;
@@ -55,8 +60,8 @@ const MainPage: React.FC = () => {
               autoplay={{ delay: 5000 }}
               className="rounded-xl overflow-hidden"
             >
-              {['https://picsum.photos/200/100', 'https://picsum.photos/200/100', 'https://picsum.photos/200/100'].map((img, idx) => (
-                <SwiperSlide key={idx} className="w-full h-[350px] relative">
+              {[Image1, Image2, Image3, Image4, Image5].map((img, idx) => (
+                <SwiperSlide key={idx} className="w-full !h-[350px] relative">
                   <Link to={`/services/projects/${idx + 1}`}>
                     <img
                       src={img}
