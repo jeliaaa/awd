@@ -42,5 +42,6 @@
     "events": "ივენთები",
     "details": "დეტალები",
     "close": "დახურვა",
-    "events_not_found": "ივენთები ვერ მოიძებნა"
+    "events_not_found": "ივენთები ვერ მოიძებნა",
+    "google_calendar": "Google კალენდარი"
 }

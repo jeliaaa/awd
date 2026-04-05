@@ -12,6 +12,7 @@ const Calendar = lazy(() => import('../pages/Calendar'));
 const Blog = lazy(() => import('../pages/Blog'));
 const BlogSingle = lazy(() => import('../pages/BlogSingle'));
 const ContactUs = lazy(() => import('../pages/ContactUs'));
+const GoogleCalendar = lazy(() => import('../pages/GoogleCalendar'));
 
 export const publicRoutes = [
     { showBreadcrumbs: false, title: "home", path: routes.home, component: Home },
@@ -23,5 +24,6 @@ export const publicRoutes = [
     { showBreadcrumbs: true, title: "calendar", path: routes.calendar, component: Calendar },
     { showBreadcrumbs: true, title: "blog", path: routes.blog, component: Blog },
     { showBreadcrumbs: true, title: "blogSingle", path: routes.blogSingle, component: BlogSingle },
-    { showBreadcrumbs: true, title: "contact", path: routes.contact, component: ContactUs }
+    { showBreadcrumbs: true, title: "contact", path: routes.contact, component: ContactUs },
+    { showBreadcrumbs: true, title: "google_calendar", path: routes.googleCalendar, component: GoogleCalendar }
 ];

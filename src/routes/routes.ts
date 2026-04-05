@@ -11,6 +11,7 @@ export const PublicRoutes = {
     blog: "/blog",
     blogSingle: "/blog/:id",
     contact: "/contact",
+    googleCalendar: "/google-calendar",
 };
 
 export const routes = {
@@ -22,6 +23,7 @@ export const navItems = [
   { label: "projects", path: "/projects" },
   { label: "stories", path: "/stories" },
   { label: "calendar", path: "/calendar" },
+  { label: "google_calendar", path: "/google-calendar" },
   { label: "blog", path: "/blog", hasDropdown: true },
   { label: "contact", path: "/contact" },
 ];

@@ -42,5 +42,6 @@
     "events": "Events",
     "details": "Details",
     "close": "Close",
-    "events_not_found": "Events not found"
+    "events_not_found": "Events not found",
+    "google_calendar": "Google Calendar"
 }
