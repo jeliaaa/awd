@@ -13,6 +13,12 @@
     "main": "Main",
     "adress": "Batumi, M. Lermontov str. #68",
     "rightsReserved": "All rights reserved",
+    "adaptiveWebsite": "Adaptive website",
+    "no_categories": "No categories",
+    "learn_more": "Learn more",
+    "watch_video": "Watch video",
+    "partner": "Partner",
+    "error_occurred": "An error occurred",
     "form": {
         "name": "Your Name",
         "email": "Your Email",
@@ -43,5 +49,40 @@
     "details": "Details",
     "close": "Close",
     "events_not_found": "Events not found",
-    "google_calendar": "Google Calendar"
+    "google_calendar": "Google Calendar",
+    "home": {
+        "news_title": "News",
+        "news_text": "You can read the latest news on our website, stay always informed!",
+        "projects_text": "Explore our ongoing and completed projects aimed at developing the community.",
+        "calendar_text": "Check our events calendar, plan your time and don't miss important events.",
+        "stats": {
+            "court_cases": "Ongoing court cases on violence against women with disabilities",
+            "beneficiaries": "Beneficiaries since our founding",
+            "employed_women": "Employed women",
+            "started_education": "Women who started education",
+            "completed_projects": "Completed projects"
+        }
+    },
+    "blog_page": {
+        "latest_news": "Latest News",
+        "search_placeholder": "Search blog...",
+        "no_posts": "No blog posts found.",
+        "categories": "Categories",
+        "all_categories": "All Categories",
+        "future_activities": "Future Activities"
+    },
+    "donation": {
+        "title": "Support Us",
+        "description": "Your support helps us grow and improve the platform.",
+        "copy": "Copy",
+        "copied": "Copied!"
+    },
+    "accessibility": {
+        "title": "Accessibility Settings",
+        "font_size": "Font Size"
+    },
+    "tts": {
+        "loading": "Loading...",
+        "play": "Play"
+    }
 }

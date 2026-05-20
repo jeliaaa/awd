@@ -56,7 +56,7 @@ const Header = () => {
           className="bg-gray-200 md:block hidden title text-primary rounded-2xl p-3"
           to={`https://adaptive.aowd.ge/${i18n.language}`}
         >
-          ადაპტირებული ვებ-გვერდი
+          {t('adaptiveWebsite')}
         </Link>
 
         <LanguageDropdown />
@@ -92,7 +92,7 @@ const Header = () => {
                       ))
                     ) : (
                       <div className="px-4 py-3 text-sm text-gray-500">
-                        No categories
+                        {t('no_categories')}
                       </div>
                     )}
                   </div>
@@ -118,7 +118,7 @@ const Header = () => {
           className="bg-gray-200 md:hidden title text-primary rounded-2xl p-3 text-center"
           to={`https://adaptive.aowd.ge/${i18n.language}`}
         >
-          ადაპტირებული ვებ-გვერდი
+          {t('adaptiveWebsite')}
         </Link>
 
         <button

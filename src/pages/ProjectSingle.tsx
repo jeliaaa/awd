@@ -1,11 +1,13 @@
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useApiStore } from "../store/apiStore";
 import { Link, useParams } from "react-router-dom";
 import mainLogo from "../assets/awd_logo.png"
 import Loader from "../components/Loader";
 
 const BlogSingle = () => {
+    const { t } = useTranslation();
     const { id } = useParams();
     const { projectSingle, fetchProjectsSingle, loading } = useApiStore();
 
@@ -53,7 +55,7 @@ const BlogSingle = () => {
             ></div>
 
             {projectSingle?.partner && <div className="w-full border-y py-5 flex items-center flex-col">
-                <span className="title text-center w-full">პარტნიორი:</span>
+                <span className="title text-center w-full">{t('partner')}:</span>
                 <div className="flex w-full gap-x-2 shadow-md p-3">
                     <img className="w-20 aspect-square object-cover" src={projectSingle?.partner?.image} alt="..." />
                     <div className="flex flex-col">

@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -7,11 +7,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Link } from 'react-router-dom';
 
-import Image1 from '../assets/images/474656175_636059092426686_6626033741459182921_n.jpg'
+
 import Image2 from '../assets/images/475298315_639262962106299_2393968445266418199_n.jpg'
-import Image3 from '../assets/images/477307551_654598196995109_9179134437802262258_n.jpg'
 import Image4 from '../assets/images/476835168_654603073661288_1960006179725840025_n.jpg'
-import Image5 from '../assets/images/477792317_654875303634065_4687244993273870379_n.jpg'
+
+
 type HeroBoxProps = {
   heading: string;
   text: string;
@@ -20,30 +20,34 @@ type HeroBoxProps = {
 };
 
 const statsData = [
-  { number: 10, label: 'მიმდინარე სასამართლო ქეისი შშმ ქალის მიმართ ძალადობის საკითხზე' },
-  { number: 850, label: 'ბენეფიციარი დაარსების დღიდან' },
-  { number: 27, label: 'დასაქმებული ქალი' },
-  { number: 12, label: 'ქალმა დაიწყო განათლება' },
-  { number: 13, label: 'დასრულებული პროექტი' },
+  { number: 10, labelKey: 'home.stats.court_cases' },
+  { number: 850, labelKey: 'home.stats.beneficiaries' },
+  { number: 27, labelKey: 'home.stats.employed_women' },
+  { number: 12, labelKey: 'home.stats.started_education' },
+  { number: 13, labelKey: 'home.stats.completed_projects' },
 ];
 
-const HeroBox: React.FC<HeroBoxProps> = ({ heading, text, image, to }) => (
-  <div className="flex flex-col md:flex-row items-center bg-background rounded-lg shadow-md p-6 gap-6 w-full ">
-    <div className="flex flex-col gap-3 md:w-1/2 w-full">
-      <p className="title font-bold text-primary">{heading}</p>
-      <p className="plain-text text-gray-700">{text}</p>
-      <Link to={to} className="w-full md:w-2/3">
-        <button className="w-full bg-primary text-background rounded px-4 py-2 hover:bg-primary/90 transition">
-          გაიგე მეტი
-        </button>
-      </Link>
+const HeroBox: React.FC<HeroBoxProps> = ({ heading, text, image, to }) => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="flex flex-col md:flex-row items-center bg-background rounded-lg shadow-md p-6 gap-6 w-full ">
+      <div className="flex flex-col gap-3 md:w-1/2 w-full">
+        <p className="title font-bold text-primary">{heading}</p>
+        <p className="plain-text text-gray-700">{text}</p>
+        <Link to={to} className="w-full md:w-2/3">
+          <button className="w-full bg-primary text-background rounded px-4 py-2 hover:bg-primary/90 transition">
+            {t('learn_more')}
+          </button>
+        </Link>
+      </div>
+      <img src={image} alt={heading} className="md:w-1/2 md:h-auto h-[200px] w-full rounded-lg object-cover" />
     </div>
-    <img src={image} alt={heading} className="md:w-1/2 md:h-auto h-[200px] w-full rounded-lg object-cover" />
-  </div>
-);
+  );
+};
 
 const MainPage: React.FC = () => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className="w-full py-8 lg:pb-0 lg:pt-4 space-y-8 bg-primary">
@@ -60,7 +64,7 @@ const MainPage: React.FC = () => {
               autoplay={{ delay: 5000 }}
               className="rounded-xl overflow-hidden"
             >
-              {[Image1, Image2, Image3, Image4, Image5].map((img, idx) => (
+              {[Image2, Image4].map((img, idx) => (
                 <SwiperSlide key={idx} className="w-full !h-[350px] relative">
                   <Link to={`/services/projects/${idx + 1}`}>
                     <img
@@ -77,8 +81,8 @@ const MainPage: React.FC = () => {
           <div className="lg:w-1/2 w-full">
             <HeroBox
               to="/news"
-              heading={"ახალი ამბები"}
-              text="შეგიძლიათ ნახოთ ახალი ამბები ჩვენს ვებ-გვერდზე, იყავით მუდამ საქმის კურსში!"
+              heading={t('home.news_title')}
+              text={t('home.news_text')}
               image={'https://picsum.photos/200'}
             />
           </div>
@@ -86,14 +90,14 @@ const MainPage: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-6">
           <HeroBox
             to="/projects"
-            heading={"პროექტები"}
-            text="იხილეთ ჩვენი მიმდინარე და დასრულებული პროექტები, რომლებიც მიზნად ისახავს საზოგადოების განვითარებას."
+            heading={t('projects')}
+            text={t('home.projects_text')}
             image={'https://picsum.photos/200'}
           />
           <HeroBox
             to="/calendar"
-            heading={"კალენდარი"}
-            text="იხილეთ ჩვენი ღონისძიებების კალენდარი, დაგეგმეთ თქვენი დრო და არ გამოტოვოთ მნიშვნელოვანი მოვლენები."
+            heading={t('calendar')}
+            text={t('home.calendar_text')}
             image={'https://picsum.photos/200'}
           />
         </div>
@@ -126,11 +130,11 @@ const MainPage: React.FC = () => {
             },
           }}
         >
-          {statsData.map(({ number, label }, index) => (
+          {statsData.map(({ number, labelKey }, index) => (
             <SwiperSlide key={index}>
               <div className="h-[200px] flex flex-col justify-center items-center bg-white">
                 <h1 className="title">{number}</h1>
-                <h3 className="text-center plain-text">{label}</h3>
+                <h3 className="text-center plain-text">{t(labelKey)}</h3>
               </div>
             </SwiperSlide>
           ))}

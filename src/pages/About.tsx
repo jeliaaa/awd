@@ -1,9 +1,11 @@
 
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useApiStore } from "../store/apiStore";
 import Loader from "../components/Loader";
 
 const About = () => {
+  const { t } = useTranslation();
   const { loading, about, members, fetchAbout, fetchMembers } = useApiStore();
 
   useEffect(() => {
@@ -13,12 +15,12 @@ const About = () => {
 
   const tabs = [
     {
-      name: 'მოკლე ინფორმაცია', id: 0, elem: <div className="space-y-6 plain-text">
+      name: t('shortInfo'), id: 0, elem: <div className="space-y-6 plain-text">
         <div dangerouslySetInnerHTML={{ __html: about?.content || "" }} />
       </div>
     },
     {
-      name: 'გუნდი', id: 1,
+      name: t('team'), id: 1,
 
       elem: <div className="flex flex-wrap pb-10 gap-6 justify-center" >
 

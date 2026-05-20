@@ -20,7 +20,7 @@ const ContactUs = () => {
     // Gather values and handle submit
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        sendEmail(name, email, message).then(() => alert(resMessage)).catch(() => alert("დაფიქსირდა შეცდომა"));
+        sendEmail(name, email, message).then(() => alert(resMessage)).catch(() => alert(t("error_occurred")));
         setName("");
         setEmail("");
         setMessage("");

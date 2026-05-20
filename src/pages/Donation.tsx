@@ -1,9 +1,11 @@
-
+import { useTranslation } from "react-i18next";
 
 function Donation() {
+    const { t } = useTranslation();
+
     return (
         <div>
-            დონაცია
+            {t('donate')}
         </div>
     )
 }

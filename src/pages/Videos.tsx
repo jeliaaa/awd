@@ -1,8 +1,10 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useApiStore } from "../store/apiStore";
 import Loader from "../components/Loader";
 
 function Videos() {
+    const { t } = useTranslation();
     const { loading, videos, fetchVideos } = useApiStore();
     useEffect(() => {
         fetchVideos()
@@ -27,7 +29,7 @@ function Videos() {
                                 />
                                 <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                                     <span className="text-white plain-text font-bold">
-                                        ნახე ვიდეო
+                                        {t('watch_video')}
                                     </span>
                                 </div>
                             </div>

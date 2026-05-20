@@ -1,10 +1,12 @@
 import { useEffect, useMemo } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { useApiStore } from "../store/apiStore";
 import Loader from "../components/Loader";
 
 export default function Blog() {
+  const { t } = useTranslation();
   const {
     blog,
     fetchBlog,
@@ -81,20 +83,20 @@ export default function Blog() {
   return (
     <div className="flex pt-15 flex-col lg:flex-row gap-6 p-4 pb-20 w-full mx-auto">
       <div className="flex-1">
-        <h1 className="title font-bold mb-4">Latest News</h1>
+        <h1 className="title font-bold mb-4">{t("blog_page.latest_news")}</h1>
 
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <input
             type="text"
             value={search}
             onChange={(e) => handleSearchChange(e.target.value)}
-            placeholder="Search blog..."
+            placeholder={t("blog_page.search_placeholder")}
             className="w-full md:w-1/2 border border-gray-300 rounded px-4 py-2 outline-none focus:border-primary"
           />
         </div>
 
         {paginatedBlogs.length === 0 ? (
-          <div className="plain-text text-gray-500">No blog posts found.</div>
+          <div className="plain-text text-gray-500">{t("blog_page.no_posts")}</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedBlogs.map((item) => (
@@ -143,7 +145,7 @@ export default function Blog() {
       </div>
 
       <aside className="lg:w-1/5 w-full border-primary border shadow-primary p-4">
-        <h2 className="title font-bold mb-4">Categories</h2>
+        <h2 className="title font-bold mb-4">{t("blog_page.categories")}</h2>
 
         <ul className="space-y-2 plain-text mb-6">
           <li>
@@ -154,7 +156,7 @@ export default function Blog() {
                 categorySlug === "" ? "text-primary font-bold" : "text-gray-700"
               }`}
             >
-              All Categories
+              {t("blog_page.all_categories")}
             </button>
           </li>
 
@@ -175,7 +177,7 @@ export default function Blog() {
           ))}
         </ul>
 
-        <h2 className="title font-bold mb-4">Future Activities</h2>
+        <h2 className="title font-bold mb-4">{t("blog_page.future_activities")}</h2>
         <ul className="space-y-2 plain-text">
           {activities.map((activity) => (
             <li

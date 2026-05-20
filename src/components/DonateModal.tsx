@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   open: boolean;
@@ -6,6 +7,8 @@ type Props = {
 };
 
 export default function DonateModal({ open, onClose }: Props) {
+  const { t } = useTranslation();
+
   const accounts = [
     {
       bank: "TBC Bank",
@@ -19,7 +22,7 @@ export default function DonateModal({ open, onClose }: Props) {
 
   const copy = (text: string) => {
     navigator.clipboard.writeText(text);
-    alert("Copied!");
+    alert(t("donation.copied"));
   };
 
   return (
@@ -48,11 +51,11 @@ export default function DonateModal({ open, onClose }: Props) {
               className="text-xl font-bold mb-2"
               style={{ color: "var(--color-primary)" }}
             >
-              Support Us 💙
+              {t("donation.title")} 💙
             </h2>
 
             <p className="text-sm mb-4 opacity-70">
-              Your support helps us grow and improve the platform.
+              {t("donation.description")}
             </p>
 
             {/* BANK LIST */}
@@ -88,7 +91,7 @@ export default function DonateModal({ open, onClose }: Props) {
                         color: "white",
                       }}
                     >
-                      Copy
+                      {t("donation.copy")}
                     </button>
                   </div>
                 </div>
@@ -104,7 +107,7 @@ export default function DonateModal({ open, onClose }: Props) {
                 color: "white",
               }}
             >
-              Close
+              {t("close")}
             </button>
           </motion.div>
         </div>

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useApiStore } from "../store/apiStore";
 import Loader from "../components/Loader";
 
 function Stories() {
+    const { t } = useTranslation();
     const { loading, stories, fetchStories } = useApiStore();
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
@@ -43,7 +45,7 @@ function Stories() {
                                     />
                                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                                         <span className="text-white plain-text font-bold">
-                                            ნახე ვიდეო
+                                            {t('watch_video')}
                                         </span>
                                     </div>
                                 </div>

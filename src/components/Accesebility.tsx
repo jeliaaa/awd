@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import AccessIcon from "../assets/icons/access-solid.svg?react";
 import CloseIcon from "../assets/icons/xmark.svg?react";
 
 const Accesebility = () => {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const [fontSizeMultiplier, setFontSizeMultiplier] = useState(1);
 
@@ -25,7 +27,7 @@ const Accesebility = () => {
                 <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex justify-center items-center z-500">
                     <div className="bg-white p-6 rounded-lg z-500 h-1/2 w-4/5 shadow-lg">
                         <div className="flex justify-between items-center mb-4">
-                            <h2 className="title font-bold mb-4 text-primary">Accessibility Settings</h2>
+                            <h2 className="title font-bold mb-4 text-primary">{t('accessibility.title')}</h2>
                             <button
                                 className="cursor-pointer transition-colors"
                                 onClick={() => setIsOpen(false)}>
@@ -34,7 +36,7 @@ const Accesebility = () => {
                         </div>
 
                         <div className="flex flex-col space-y-2 ">
-                            <label className="text-sm font-semibold text-gray-700">Font Size:</label>
+                            <label className="text-sm font-semibold text-gray-700">{t('accessibility.font_size')}:</label>
                             <div className="flex items-center space-x-2">
                                 <button
                                     onClick={() => setFontSizeMultiplier(prev => Math.max(0.8, prev - 0.1))}
