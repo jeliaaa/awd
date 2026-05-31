@@ -22,7 +22,6 @@ export const navItems = [
   { label: "about", path: "/about" },
   { label: "projects", path: "/projects" },
   { label: "stories", path: "/stories" },
-  { label: "calendar", path: "/calendar" },
   { label: "google_calendar", path: "/google-calendar" },
   { label: "blog", path: "/blog", hasDropdown: true },
   { label: "contact", path: "/contact" },

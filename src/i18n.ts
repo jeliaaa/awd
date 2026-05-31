@@ -1,31 +1,29 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
 import enTranslation from './locales/en.json';
 import kaTranslation from './locales/ka.json';
 
-// Configure i18n
+// Detect language from URL path synchronously so there is no race condition
+// e.g. /ka/about  →  "ka",  /en/projects  →  "en",  /  →  "en"
+const supportedLngs = ['en', 'ka'] as const;
+const pathSegment = window.location.pathname.split('/')[1];
+const detectedLng = supportedLngs.includes(pathSegment as 'en' | 'ka')
+  ? (pathSegment as 'en' | 'ka')
+  : 'en';
+
+// Configure i18n — no LanguageDetector plugin needed; language is resolved above
 i18n
-  .use(LanguageDetector) // Use language detector
-  .use(initReactI18next) // Passes i18n instance to react-i18next
+  .use(initReactI18next)
   .init({
     resources: {
-      en: {
-        translation: enTranslation,
-      },
-      ka: {
-        translation: kaTranslation,
-      }
+      en: { translation: enTranslation },
+      ka: { translation: kaTranslation },
     },
-    fallbackLng: 'en', // Default language
-    debug: true, // Optional: For debugging language switching
+    lng: detectedLng,          // set synchronously — no async detection
+    fallbackLng: 'en',
+    debug: false,
     interpolation: {
-      escapeValue: false, // React already escapes values to prevent XSS
-    },
-    detection: {
-      // Custom detection options
-      order: ['path', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
-      caches: ['cookie'], // Cache the user's language preference
+      escapeValue: false,
     },
   });
 
